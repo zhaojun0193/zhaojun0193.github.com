@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/09/CountDownLatch与thread-join()的区别/index.html">
 <meta property="og:site_name" content="赵军的博客">
 <meta property="og:description" content="今天学习CountDownLatch这个类，作用感觉和join很像，然后就百度了一下，看了他们之间的区别。所以在此记录一下。 首先来看一下join，在当前线程中，如果调用某个thread的join方法，那么当前线程就会被阻塞，直到thread线程执行完毕，当前线程才能继续执行。join的原理是，不断的检查thread是否存活，如果存活，那么让当前线程一直wait，直到thread线程终止，线程的t">
-<meta property="og:updated_time" content="2018-04-10T03:36:05.825Z">
+<meta property="og:updated_time" content="2018-04-10T04:43:44.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CountDownLatch与thread-join()的区别">
 <meta name="twitter:description" content="今天学习CountDownLatch这个类，作用感觉和join很像，然后就百度了一下，看了他们之间的区别。所以在此记录一下。 首先来看一下join，在当前线程中，如果调用某个thread的join方法，那么当前线程就会被阻塞，直到thread线程执行完毕，当前线程才能继续执行。join的原理是，不断的检查thread是否存活，如果存活，那么让当前线程一直wait，直到thread线程终止，线程的t">
@@ -85,6 +85,8 @@
 		        
 					<a class="weibo" target="_blank" href="https://weibo.com/u/3884931222" title="weibo"><i class="icon-weibo"></i></a>
 		        
+					<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/1b475eed02f9" title="jianshu"><i class="icon-jianshu"></i></a>
+		        
 					<a class="bilibili" target="_blank" href="https://space.bilibili.com/96065292/" title="bilibili"><i class="icon-bilibili"></i></a>
 		        
 			</div>
@@ -123,6 +125,8 @@
 						<a class="github" target="_blank" href="https://github.com/zhaojun0193" title="github"><i class="icon-github"></i></a>
 			        
 						<a class="weibo" target="_blank" href="https://weibo.com/u/3884931222" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/1b475eed02f9" title="jianshu"><i class="icon-jianshu"></i></a>
 			        
 						<a class="bilibili" target="_blank" href="https://space.bilibili.com/96065292/" title="bilibili"><i class="icon-bilibili"></i></a>
 			        
@@ -180,8 +184,7 @@
 <p>JoinTest.java:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class JoinTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">		Employee a = new Employee(&quot;A&quot;, 3000);</span><br><span class="line">		Employee b = new Employee(&quot;B&quot;, 3000);</span><br><span class="line">		Employee c = new Employee(&quot;C&quot;, 4000);</span><br><span class="line">		</span><br><span class="line">		b.start();</span><br><span class="line">		c.start();</span><br><span class="line">		</span><br><span class="line">		b.join();</span><br><span class="line">		c.join();</span><br><span class="line">		System.out.println(&quot;B,C准备完成&quot;);</span><br><span class="line">		a.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最后输出结果如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C开始准备</span><br><span class="line">B开始准备</span><br><span class="line">B 准备完成</span><br><span class="line">C 准备完成</span><br><span class="line">B,C准备完成</span><br><span class="line">A开始准备</span><br><span class="line">A 准备完成</span><br></pre></td></tr></table></figure></p>
 <p>可以看到,A总是在B,C准备完成之后才开始执行的。</p>
-<p>CountDownLatch中我们主要用到两个方法一个是await()方法，调用这个方法的线程会被阻塞，另外一个是countDown()方法，调用这个方法会使计数器减一，当计数器的值为0时，因调用await()方法被阻塞的线程会被唤醒，继续执行。</p>
-<p>接下来，我们用CountDownLatch来模拟一下。</p>
+<p>CountDownLatch中我们主要用到两个方法一个是await()方法，调用这个方法的线程会被阻塞，另外一个是countDown()方法，调用这个方法会使计数器减一，当计数器的值为0时，因调用await()方法被阻塞的线程会被唤醒，继续执行。<br><a id="more"></a><br>接下来，我们用CountDownLatch来模拟一下。</p>
 <p>Employee.java:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class Employee extends Thread&#123;</span><br><span class="line"></span><br><span class="line">	private String employeeName;</span><br><span class="line">	</span><br><span class="line">	private long time;</span><br><span class="line">	</span><br><span class="line">	private CountDownLatch countDownLatch;</span><br><span class="line"></span><br><span class="line">	public Employee(String employeeName,long time, CountDownLatch countDownLatch)&#123;</span><br><span class="line">		this.employeeName = employeeName;</span><br><span class="line">		this.time = time;</span><br><span class="line">		this.countDownLatch = countDownLatch;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			System.out.println(employeeName+ &quot;开始准备&quot;);</span><br><span class="line">			Thread.sleep(time);</span><br><span class="line">			System.out.println(employeeName+&quot; 准备完成&quot;);</span><br><span class="line">			countDownLatch.countDown();</span><br><span class="line">		&#125; catch (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>CountDownLatchTest.java:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class CountDownLatchTest &#123;</span><br><span class="line">	public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">		CountDownLatch countDownLatch = new CountDownLatch(2);</span><br><span class="line">		Employee a = new Employee(&quot;A&quot;, 3000,countDownLatch);</span><br><span class="line">		Employee b = new Employee(&quot;B&quot;, 3000,countDownLatch);</span><br><span class="line">		Employee c = new Employee(&quot;C&quot;, 4000,countDownLatch);</span><br><span class="line">		</span><br><span class="line">		b.start();</span><br><span class="line">		c.start();</span><br><span class="line">		countDownLatch.await();</span><br><span class="line">		System.out.println(&quot;B,C准备完成&quot;);</span><br><span class="line">		a.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">B开始准备</span><br><span class="line">C开始准备</span><br><span class="line">B 准备完成</span><br><span class="line">C 准备完成</span><br><span class="line">B,C准备完成</span><br><span class="line">A开始准备</span><br><span class="line">A 准备完成</span><br></pre></td></tr></table></figure></p>
@@ -435,11 +438,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
+                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
               </li>
              
               <li class="article-tag-list-item">
