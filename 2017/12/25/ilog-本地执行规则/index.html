@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/ilog/test-project-3.jpg">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/ilog/test-project-4.jpg">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/ilog/test-project-5.jpg">
-<meta property="og:updated_time" content="2017-12-25T11:20:07.988Z">
+<meta property="og:updated_time" content="2018-04-11T01:31:05.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ilog 本地执行规则">
 <meta name="twitter:description" content="前言由于我们公司用到ilog规则引擎,于是记录一下如何在本地执行规则集.方便以后自己查找. 新建规则项目以及XOM项目这两个项目是我写的一个小例子,用于演示一些基本操作. 项目结果如下:   新建规则如果 &amp;apos;保单&amp;apos; 的被保险人 的年龄 小于 20 那么 &amp;apos;返回结果&amp;apos; . 添加返回结果( &amp;quot;被保险人年龄控制&amp;quot;,不成立 ,&amp;quot;被保险人">
@@ -256,103 +256,8 @@
 <p>6.新建test类,并键入一下代码进行测试  </p>
 </li>
 </ol>
-<pre><code>package test;
-
-import ilog.rules.archive.IlrJarArchiveLoader;
-import ilog.rules.engine.IlrContext;
-import ilog.rules.engine.IlrParameterMap;
-import ilog.rules.engine.IlrRuleset;
-import ilog.rules.engine.IlrRulesetArchiveParser;
-
-import java.io.FileInputStream;
-import java.util.jar.JarInputStream;
-
-import com.zhaojun.bom.AppApplicant;
-import com.zhaojun.bom.AppInsured;
-import com.zhaojun.bom.Policy;
-import com.zhaojun.result.UnderwriteResults;
-
-public class Test {
-
-public static void main(String[] args) throws Exception {
-    invokeIlrJar();
-}
-
-public static void invokeIlrJar() throws Exception {
-    // This class is a parser of ruleset archives. The archive is given as a
-    // stream. The parsing provides:
-    // a ruleset.
-    // a business reflect used in the case of a business ruleset archive.
-    // an execution reflect, used to create the provided ruleset.
-
-    IlrRulesetArchiveParser parser = new IlrRulesetArchiveParser();
-
-    // Creates an archive loader which relies on a jar stream.
-    IlrJarArchiveLoader ruleArchvieLoader = new IlrJarArchiveLoader(
-            new JarInputStream(new FileInputStream(
-                    &quot;E:\\workspace\\odm\\ilogstudytest\\lib\\ruleset.jar&quot;)));
-    // Parses the ruleset archive.
-    parser.parseArchive(ruleArchvieLoader);
-    // Get a ruleset issued from a ruleset archive parsing.
-    IlrRuleset rtsRuleSet = parser.getRuleset();
-    // IlrContext is the base class of all the execution contexts. Rules can
-    // be executed only within an execution context.
-    // In ILOG JRules, the rule engine is an instance of IlrContext, the
-    // rule engine is simply a Java object.
-    // An IlrContext instance is always attached to an IlrRuleset. If the
-    // context is created without a ruleset passed as an argument, it
-    // creates its own ruleset.
-    // An IlrContext instance contains all the methods required to control
-    // the rule engine. IlrRuleset is responsible for rule management,
-    // IlrContext is responsible for rule execution.
-    IlrContext context = new IlrContext();
-    context.setRuleset(rtsRuleSet);
-    // Implements a structure for storing parameter values to set or get
-    // from ruleset variables. Each parameter is stored with its name and
-    // its value.
-    IlrParameterMap paramMap = new IlrParameterMap();
-
-    Policy policy = new Policy();
-    AppApplicant appApplicant = new AppApplicant();
-    AppInsured appInsured = new AppInsured();
-    appApplicant.setName(&quot;jack&quot;);
-    appApplicant.setAge(18);
-    appApplicant.setGender(false);
-    policy.setAppApplicant(appApplicant);
-
-    appInsured.setName(&quot;jack&quot;);
-    appInsured.setAge(18);
-    appInsured.setGender(true);
-    policy.setAppInsured(appInsured);
-
-    // Store for the parameter &quot;name&quot; and its value &quot;value&quot;.
-    paramMap.setParameter(&quot;policy&quot;, policy);
-    // Sets the values of the declared ruleset variables contained in the
-    // passed IlrParameterMap (defined either with the &quot;in&quot; or &quot;inout&quot;
-    // modifier).
-    context.setParameters(paramMap);
-    // Executes the ruleflow defined in the context&apos;s ruleset.
-    // Executes the task passed as the argument.
-    // context.execute(taskName);
-    context.execute();
-    // Gets the value of the ruleset parameter.
-    // Returns the values of the &quot;out&quot; ruleset variables (those defined
-    // either with the &quot;inout&quot; or &quot;out&quot; modifier).
-    // IlrParameterMap rpm = context.getReturnValues();
-    Object r = context.getParameterValue(&quot;result&quot;);
-     UnderwriteResults result =(UnderwriteResults)r;
-
-     if(result != null &amp;&amp; result.getUnderwriteList() != null){
-         System.out.println(result.getUnderwriteList().get(0).getMessage());
-     }
-
-    // Disconnects all connected IlrTool.
-    context.disconnectTools();
-    // Called by Rule Studio to prepare a context for another execution.
-    context.reset();
-   }
-}
-</code></pre><p> 7.运行测试类,见到以下输出结果.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ilog.rules.archive.IlrJarArchiveLoader;</span><br><span class="line"><span class="keyword">import</span> ilog.rules.engine.IlrContext;</span><br><span class="line"><span class="keyword">import</span> ilog.rules.engine.IlrParameterMap;</span><br><span class="line"><span class="keyword">import</span> ilog.rules.engine.IlrRuleset;</span><br><span class="line"><span class="keyword">import</span> ilog.rules.engine.IlrRulesetArchiveParser;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.jar.JarInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zhaojun.bom.AppApplicant;</span><br><span class="line"><span class="keyword">import</span> com.zhaojun.bom.AppInsured;</span><br><span class="line"><span class="keyword">import</span> com.zhaojun.bom.Policy;</span><br><span class="line"><span class="keyword">import</span> com.zhaojun.result.UnderwriteResults;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	invokeIlrJar();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">invokeIlrJar</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	<span class="comment">// This class is a parser of ruleset archives. The archive is given as a</span></span><br><span class="line">	<span class="comment">// stream. The parsing provides:</span></span><br><span class="line">	<span class="comment">// a ruleset.</span></span><br><span class="line">	<span class="comment">// a business reflect used in the case of a business ruleset archive.</span></span><br><span class="line">	<span class="comment">// an execution reflect, used to create the provided ruleset.</span></span><br><span class="line"></span><br><span class="line">	IlrRulesetArchiveParser parser = <span class="keyword">new</span> IlrRulesetArchiveParser();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Creates an archive loader which relies on a jar stream.</span></span><br><span class="line">	IlrJarArchiveLoader ruleArchvieLoader = <span class="keyword">new</span> IlrJarArchiveLoader(</span><br><span class="line">			<span class="keyword">new</span> JarInputStream(<span class="keyword">new</span> FileInputStream(</span><br><span class="line">					<span class="string">"E:\\workspace\\odm\\ilogstudytest\\lib\\ruleset.jar"</span>)));</span><br><span class="line">	<span class="comment">// Parses the ruleset archive.</span></span><br><span class="line">	parser.parseArchive(ruleArchvieLoader);</span><br><span class="line">	<span class="comment">// Get a ruleset issued from a ruleset archive parsing.</span></span><br><span class="line">	IlrRuleset rtsRuleSet = parser.getRuleset();</span><br><span class="line">	<span class="comment">// IlrContext is the base class of all the execution contexts. Rules can</span></span><br><span class="line">	<span class="comment">// be executed only within an execution context.</span></span><br><span class="line">	<span class="comment">// In ILOG JRules, the rule engine is an instance of IlrContext, the</span></span><br><span class="line">	<span class="comment">// rule engine is simply a Java object.</span></span><br><span class="line">	<span class="comment">// An IlrContext instance is always attached to an IlrRuleset. If the</span></span><br><span class="line">	<span class="comment">// context is created without a ruleset passed as an argument, it</span></span><br><span class="line">	<span class="comment">// creates its own ruleset.</span></span><br><span class="line">	<span class="comment">// An IlrContext instance contains all the methods required to control</span></span><br><span class="line">	<span class="comment">// the rule engine. IlrRuleset is responsible for rule management,</span></span><br><span class="line">	<span class="comment">// IlrContext is responsible for rule execution.</span></span><br><span class="line">	IlrContext context = <span class="keyword">new</span> IlrContext();</span><br><span class="line">	context.setRuleset(rtsRuleSet);</span><br><span class="line">	<span class="comment">// Implements a structure for storing parameter values to set or get</span></span><br><span class="line">	<span class="comment">// from ruleset variables. Each parameter is stored with its name and</span></span><br><span class="line">	<span class="comment">// its value.</span></span><br><span class="line">	IlrParameterMap paramMap = <span class="keyword">new</span> IlrParameterMap();</span><br><span class="line"></span><br><span class="line">	Policy policy = <span class="keyword">new</span> Policy();</span><br><span class="line">	AppApplicant appApplicant = <span class="keyword">new</span> AppApplicant();</span><br><span class="line">	AppInsured appInsured = <span class="keyword">new</span> AppInsured();</span><br><span class="line">	appApplicant.setName(<span class="string">"jack"</span>);</span><br><span class="line">	appApplicant.setAge(<span class="number">18</span>);</span><br><span class="line">	appApplicant.setGender(<span class="keyword">false</span>);</span><br><span class="line">	policy.setAppApplicant(appApplicant);</span><br><span class="line">	</span><br><span class="line">	appInsured.setName(<span class="string">"jack"</span>);</span><br><span class="line">	appInsured.setAge(<span class="number">18</span>);</span><br><span class="line">	appInsured.setGender(<span class="keyword">true</span>);</span><br><span class="line">	policy.setAppInsured(appInsured);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Store for the parameter "name" and its value "value".</span></span><br><span class="line">	paramMap.setParameter(<span class="string">"policy"</span>, policy);</span><br><span class="line">	<span class="comment">// Sets the values of the declared ruleset variables contained in the</span></span><br><span class="line">	<span class="comment">// passed IlrParameterMap (defined either with the "in" or "inout"</span></span><br><span class="line">	<span class="comment">// modifier).</span></span><br><span class="line">	context.setParameters(paramMap);</span><br><span class="line">	<span class="comment">// Executes the ruleflow defined in the context's ruleset.</span></span><br><span class="line">	<span class="comment">// Executes the task passed as the argument.</span></span><br><span class="line">	<span class="comment">// context.execute(taskName);</span></span><br><span class="line">	context.execute();</span><br><span class="line">	<span class="comment">// Gets the value of the ruleset parameter.</span></span><br><span class="line">	<span class="comment">// Returns the values of the "out" ruleset variables (those defined</span></span><br><span class="line">	<span class="comment">// either with the "inout" or "out" modifier).</span></span><br><span class="line">	<span class="comment">// IlrParameterMap rpm = context.getReturnValues();</span></span><br><span class="line">	Object r = context.getParameterValue(<span class="string">"result"</span>);</span><br><span class="line">	 UnderwriteResults result =(UnderwriteResults)r;</span><br><span class="line">	 </span><br><span class="line">	 <span class="keyword">if</span>(result != <span class="keyword">null</span> &amp;&amp; result.getUnderwriteList() != <span class="keyword">null</span>)&#123;</span><br><span class="line">		 System.out.println(result.getUnderwriteList().get(<span class="number">0</span>).getMessage());</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Disconnects all connected IlrTool.</span></span><br><span class="line">	context.disconnectTools();</span><br><span class="line">	<span class="comment">// Called by Rule Studio to prepare a context for another execution.</span></span><br><span class="line">	context.reset();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 7.运行测试类,见到以下输出结果.</p>
 <pre><code>被保险人年龄小于20
 </code></pre><p>本地执行规则的好处就是执行速度比较快,而且能够对代码进行断点调试,方便查找bug.</p>
 <hr>
@@ -609,11 +514,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ilog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
               </li>
              
               <li class="article-tag-list-item">
