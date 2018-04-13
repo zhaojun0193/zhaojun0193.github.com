@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: SpringMVC | 赵军的博客</title>
+  <title>《跟我学Shiro》学习笔记 第一章:Shiro简介 | 赵军的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="赵军的博客">
-<meta property="og:url" content="http://yoursite.com/tags/SpringMVC/index.html">
+  <meta name="description" content="前言现在在学习Shiro，参照着张开涛的博客进行学习，然后自己写博客记录一下学习中的知识点，一来可以加深理解，二来以后遗忘了可以查阅。没有学习过Shiro的小伙伴，也可以和我一起学习，大家共同进步！ 1.1 Shiro的简介Apache Shiro是Java的一个安全框架。目前，使用Apache Shiro的人越来越多，因为它相当简单。可能没有Spring Security做的功能强大，但是实际工">
+<meta name="keywords" content="shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《跟我学Shiro》学习笔记 第一章:Shiro简介">
+<meta property="og:url" content="http://yoursite.com/2018/04/13/《跟我学shiro》学习笔记-第一章/index.html">
 <meta property="og:site_name" content="赵军的博客">
+<meta property="og:description" content="前言现在在学习Shiro，参照着张开涛的博客进行学习，然后自己写博客记录一下学习中的知识点，一来可以加深理解，二来以后遗忘了可以查阅。没有学习过Shiro的小伙伴，也可以和我一起学习，大家共同进步！ 1.1 Shiro的简介Apache Shiro是Java的一个安全框架。目前，使用Apache Shiro的人越来越多，因为它相当简单。可能没有Spring Security做的功能强大，但是实际工">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-04-13T03:16:21.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赵军的博客">
+<meta name="twitter:title" content="《跟我学Shiro》学习笔记 第一章:Shiro简介">
+<meta name="twitter:description" content="前言现在在学习Shiro，参照着张开涛的博客进行学习，然后自己写博客记录一下学习中的知识点，一来可以加深理解，二来以后遗忘了可以查阅。没有学习过Shiro的小伙伴，也可以和我一起学习，大家共同进步！ 1.1 Shiro的简介Apache Shiro是Java的一个安全框架。目前，使用Apache Shiro的人越来越多，因为它相当简单。可能没有Spring Security做的功能强大，但是实际工">
+<meta name="twitter:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E5%8A%9F%E8%83%BD.png">
   
     <link rel="alternative" href="/atom.xml" title="赵军的博客" type="application/atom+xml">
   
@@ -149,60 +158,216 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-《跟我学shiro》学习笔记-第一章" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/11/SpringMVC实现Restful接口/" class="archive-article-date">
-  	<time datetime="2018-04-11T04:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/11/SpringMVC实现Restful接口/">SpringMVC实现RESTful接口,关于静态资源的访问</a>
+    <h1 class="article-title" itemprop="name">
+      《跟我学Shiro》学习笔记 第一章:Shiro简介
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/04/13/《跟我学shiro》学习笔记-第一章/" class="archive-article-date">
+  	<time datetime="2018-04-13T02:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
+</a>
+        
+      </header>
+    
+	<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>现在在学习Shiro，参照着张开涛的博客进行学习，然后自己写博客记录一下学习中的知识点，一来可以加深理解，二来以后遗忘了可以查阅。没有学习过Shiro的小伙伴，也可以和我一起学习，大家共同进步！</p>
+<h3 id="1-1-Shiro的简介"><a href="#1-1-Shiro的简介" class="headerlink" title="1.1 Shiro的简介"></a>1.1 Shiro的简介</h3><p>Apache Shiro是Java的一个安全框架。目前，使用Apache Shiro的人越来越多，因为它相当简单。可能没有Spring Security做的功能强大，但是实际工作中可能并不需要那么复杂的东西，所以，使用Shiro能解决我们项目中遇到的问题就好了。</p>
+<p>###1.2 Shiron的功能</p>
+<p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E5%8A%9F%E8%83%BD.png" alt="shiro功能"></p>
+<p><strong>Authentication</strong>：身份认证/登录，验证用户是不是拥有相应的身份；</p>
+<p><strong>Authorization</strong>：授权，即权限验证，验证某个已认证的用户是否拥有某个权限；即判断用户是否能做事情，常见的如：验证某个用户是否拥有某个角色。或者细粒度的验证某个用户对某个资源是否具有某个权限；</p>
+<p><strong>Session Manager</strong>：会话管理，即用户登录后就是一次会话，在没有退出之前，它的所有信息都在会话中；会话可以是普通JavaSE环境的，也可以是如Web环境的；</p>
+<p><strong>Cryptography</strong>：加密，保护数据的安全性，如密码加密存储到数据库，而不是明文存储；</p>
+<a id="more"></a>
+<p><strong>Web Support</strong>：Web支持，可以非常容易的集成到Web环境；</p>
+<p>Caching：缓存，比如用户登录后，其用户信息、拥有的角色/权限不必每次去查，这样可以提高效率；</p>
+<p><strong>Concurrency</strong>：shiro支持多线程应用的并发验证，即如在一个线程中开启另一个线程，能把权限自动传播过去；</p>
+<p><strong>Testing</strong>：提供测试支持；</p>
+<p><strong>Run As</strong>：允许一个用户假装为另一个用户（如果他们允许）的身份进行访问；</p>
+<p><strong>Remember Me</strong>：记住我，这个是非常常见的功能，即一次登录后，下次再来的话不用登录了。</p>
+<p><strong>记住一点，Shiro不会去维护用户、维护权限；这些需要我们自己去设计提供；然后通过相应的接口注入给Shiro即可。</strong></p>
+<h3 id="1-3-运行原理"><a href="#1-3-运行原理" class="headerlink" title="1.3 运行原理"></a>1.3 运行原理</h3><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86.png" alt="运行原理"></p>
+<p>可以看到：应用代码直接交互的对象是Subject，也就是说Shiro的对外API核心就是Subject；其每个API的含义：</p>
+<p><strong>Subject</strong>：主体，代表了当前“用户”，这个用户不一定是一个具体的人，与当前应用交互的任何东西都是Subject，如网络爬虫，机器人等；即一个抽象概念；所有Subject都绑定到SecurityManager，与Subject的所有交互都会委托给SecurityManager；可以把Subject认为是一个门面；SecurityManager才是实际的执行者；</p>
+<p><strong>SecurityManager</strong>：安全管理器；即所有与安全有关的操作都会与SecurityManager交互；且它管理着所有Subject；可以看出它是Shiro的核心，它负责与后边介绍的其他组件进行交互，如果学习过SpringMVC，你可以把它看成DispatcherServlet前端控制器；</p>
+<p><strong>Realm</strong>：域，Shiro从从Realm获取安全数据（如用户、角色、权限），就是说SecurityManager要验证用户身份，那么它需要从Realm获取相应的用户进行比较以确定用户身份是否合法；也需要从Realm得到用户相应的角色/权限进行验证用户是否能进行操作；可以把Realm看成DataSource，即安全数据源。</p>
+<p>也就是说对于我们而言，最简单的一个Shiro应用：<br>1、应用代码通过Subject来进行认证和授权，而Subject又委托给SecurityManager；<br>2、我们需要给Shiro的SecurityManager注入Realm，从而让SecurityManager能得到合法的用户及其权限进行判断</p>
+<p>###1.4 shiro的架构</p>
+<p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="shiro的架构"></p>
+<p><strong>Subject</strong>：主体，可以看到主体可以是任何可以与应用交互的“用户”；</p>
+<p><strong>SecurityManager</strong>：相当于SpringMVC中的DispatcherServlet或者Struts2中的FilterDispatcher；是Shiro的心脏；所有具体的交互都通过SecurityManager进行控制；它管理着所有Subject、且负责进行认证和授权、及会话、缓存的管理。</p>
+<p><strong>Authenticator</strong>：认证器，负责主体认证的，这是一个扩展点，如果用户觉得Shiro默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；</p>
+<p><strong>Authrizer</strong>：授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能；</p>
+<p><strong>Realm</strong>：可以有1个或多个Realm，可以认为是安全实体数据源，即用于获取安全实体的；可以是JDBC实现，也可以是LDAP实现，或者内存实现等等；由用户提供；注意：Shiro不知道你的用户/权限存储在哪及以何种格式存储；所以我们一般在应用中都需要实现自己的Realm；</p>
+<p><strong>SessionManager</strong>：如果写过Servlet就应该知道Session的概念，Session呢需要有人去管理它的生命周期，这个组件就是SessionManager；而Shiro并不仅仅可以用在Web环境，也可以用在如普通的JavaSE环境、EJB等环境；所有呢，Shiro就抽象了一个自己的Session来管理主体与应用之间交互的数据；这样的话，比如我们在Web环境用，刚开始是一台Web服务器；接着又上了台EJB服务器；这时想把两台服务器的会话数据放到一个地方，这个时候就可以实现自己的分布式会话（如把数据放到Memcached服务器）；</p>
+<p><strong>SessionDAO</strong>：DAO大家都用过，数据访问对象，用于会话的CRUD，比如我们想把Session保存到数据库，那么可以实现自己的SessionDAO，通过如JDBC写到数据库；比如想把Session放到Memcached中，可以实现自己的Memcached SessionDAO；另外SessionDAO中可以使用Cache进行缓存，以提高性能；</p>
+<p><strong>CacheManager</strong>：缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能</p>
+<p><strong>Cryptography</strong>：密码模块，Shiro提高了一些常见的加密组件用于如密码加密/解密的。</p>
+<p>到此Shiro架构及其组件就认识完了。</p>
+<p>第一章主要是Shiro的基本认识，包括Shiro提供的功能，原理，架构等等。这些都是理论知识，理解了这些对后面的学习会有帮助。</p>
+<hr>
+<p>张开涛的博客：<a href="http://jinnianshilongnian.iteye.com/category/305053" target="_blank" rel="noopener">http://jinnianshilongnian.iteye.com/category/305053</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringMVC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shiro</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/13/《跟我学shiro》学习笔记-第一章/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/11/SpringMVC实现Restful接口/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringMVC实现RESTful接口,关于静态资源的访问</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -225,9 +390,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
