@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E5%8A%9F%E8%83%BD.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-04-13T03:22:53.235Z">
+<meta property="og:updated_time" content="2018-04-13T03:24:41.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《跟我学Shiro》学习笔记 第一章:Shiro简介">
 <meta name="twitter:description" content="前言现在在学习Shiro，参照着张开涛的博客进行学习，然后自己写博客记录一下学习中的知识点，一来可以加深理解，二来以后遗忘了可以查阅。没有学习过Shiro的小伙伴，也可以和我一起学习，大家共同进步！ 1.1 Shiro的简介Apache Shiro是Java的一个安全框架。目前，使用Apache Shiro的人越来越多，因为它相当简单。可能没有Spring Security做的功能强大，但是实际工">
@@ -202,8 +202,7 @@
 <p><strong>SecurityManager</strong>：安全管理器；即所有与安全有关的操作都会与SecurityManager交互；且它管理着所有Subject；可以看出它是Shiro的核心，它负责与后边介绍的其他组件进行交互，如果学习过SpringMVC，你可以把它看成DispatcherServlet前端控制器；</p>
 <p><strong>Realm</strong>：域，Shiro从从Realm获取安全数据（如用户、角色、权限），就是说SecurityManager要验证用户身份，那么它需要从Realm获取相应的用户进行比较以确定用户身份是否合法；也需要从Realm得到用户相应的角色/权限进行验证用户是否能进行操作；可以把Realm看成DataSource，即安全数据源。</p>
 <p>也就是说对于我们而言，最简单的一个Shiro应用：<br>1、应用代码通过Subject来进行认证和授权，而Subject又委托给SecurityManager；<br>2、我们需要给Shiro的SecurityManager注入Realm，从而让SecurityManager能得到合法的用户及其权限进行判断</p>
-<p>###1.4 shiro的架构</p>
-<p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="shiro的架构"></p>
+<h3 id="1-4-shiro的架构"><a href="#1-4-shiro的架构" class="headerlink" title="1.4 shiro的架构"></a>1.4 shiro的架构</h3><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/shiro%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="shiro的架构"></p>
 <p><strong>Subject</strong>：主体，可以看到主体可以是任何可以与应用交互的“用户”；</p>
 <p><strong>SecurityManager</strong>：相当于SpringMVC中的DispatcherServlet或者Struts2中的FilterDispatcher；是Shiro的心脏；所有具体的交互都通过SecurityManager进行控制；它管理着所有Subject、且负责进行认证和授权、及会话、缓存的管理。</p>
 <p><strong>Authenticator</strong>：认证器，负责主体认证的，这是一个扩展点，如果用户觉得Shiro默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；</p>
@@ -459,11 +458,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -471,7 +470,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
+                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
               </li>
              
               <li class="article-tag-list-item">
