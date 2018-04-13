@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>跟我学Shiro》学习笔记 第二章:身份验证 | 赵军的博客</title>
+  <title>《跟我学Shiro》学习笔记 第二章:身份验证 | 赵军的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言上一章主要对Shiro功能，运行原理，架构设计进行了介绍，这一章我们主要学习Shiro的身份验证。本章的代码我会上传至GitHub，链接见文末。 身份验证：即在应用中谁能证明他就是他本人。一般提供如他们的身份ID一些标识信息来表明他就是他本人，如提供身份证，用户名/密码来证明。 在shiro中，用户需要提供principals （身份）和credentials（证明）给shiro，从而应用能验">
 <meta name="keywords" content="shiro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跟我学Shiro》学习笔记 第二章:身份验证">
+<meta property="og:title" content="《跟我学Shiro》学习笔记 第二章:身份验证">
 <meta property="og:url" content="http://yoursite.com/2018/04/13/《跟我学shiro》学习笔记-第二章/index.html">
 <meta property="og:site_name" content="赵军的博客">
 <meta property="og:description" content="前言上一章主要对Shiro功能，运行原理，架构设计进行了介绍，这一章我们主要学习Shiro的身份验证。本章的代码我会上传至GitHub，链接见文末。 身份验证：即在应用中谁能证明他就是他本人。一般提供如他们的身份ID一些标识信息来表明他就是他本人，如提供身份证，用户名/密码来证明。 在shiro中，用户需要提供principals （身份）和credentials（证明）给shiro，从而应用能验">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro%E9%BB%98%E8%AE%A4Realm.png">
-<meta property="og:updated_time" content="2018-04-13T17:21:57.992Z">
+<meta property="og:updated_time" content="2018-04-13T17:28:39.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="跟我学Shiro》学习笔记 第二章:身份验证">
+<meta name="twitter:title" content="《跟我学Shiro》学习笔记 第二章:身份验证">
 <meta name="twitter:description" content="前言上一章主要对Shiro功能，运行原理，架构设计进行了介绍，这一章我们主要学习Shiro的身份验证。本章的代码我会上传至GitHub，链接见文末。 身份验证：即在应用中谁能证明他就是他本人。一般提供如他们的身份ID一些标识信息来表明他就是他本人，如提供身份证，用户名/密码来证明。 在shiro中，用户需要提供principals （身份）和credentials（证明）给shiro，从而应用能验">
 <meta name="twitter:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png">
   
@@ -164,7 +164,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      跟我学Shiro》学习笔记 第二章:身份验证
+      《跟我学Shiro》学习笔记 第二章:身份验证
     </h1>
   
 
@@ -186,6 +186,7 @@
 <p><strong>principals</strong>：身份，即主体的标识属性，可以是任何东西，如用户名、邮箱等，唯一即可。一个主体可以有多个principals，但只有一个Primary principals，一般是用户名/密码/手机号。</p>
 <p><strong>credentials</strong>：证明/凭证，即只有主体知道的安全值，如密码/数字证书等。</p>
 <p>最常见的principals和credentials组合就是用户名/密码了。接下来先进行一个基本的身份认证。</p>
+<a id="more"></a>
 <h3 id="2-1环境准备"><a href="#2-1环境准备" class="headerlink" title="2.1环境准备"></a>2.1环境准备</h3><p>引入相关依赖</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.16.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shiro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shiro-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="2-2登录-登出"><a href="#2-2登录-登出" class="headerlink" title="2.2登录/登出"></a>2.2登录/登出</h3><ol>
@@ -538,19 +539,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
+                <a href="javascript:void(0)" class="js-tag color2">java并发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shiro</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
               </li>
              
               <li class="article-tag-list-item">
