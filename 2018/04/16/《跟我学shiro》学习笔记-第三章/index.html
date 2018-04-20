@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>利用Hexo搭建个人博客 | 赵军的博客</title>
+  <title>《跟我学Shiro》学习笔记 第三章:授权 | 赵军的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言想自己弄个博客做一下学习记录,以及分享学习心得,了解到github的pages功能,然后选择了Hexo,期间遇到了一些问题.写此博客记录一下.文章包含以下内容:    安装NodeJs   安装hexo   初始化   生成静态页面   本地启动   更换主题   部署到github 更改头像 新建文章  安装NodeJs访问NodeJs官网下载页面选择合适的版本进行下载.   安装hexo$">
-<meta name="keywords" content="随笔">
+  <meta name="description" content="前言本章我们来学习权限认证，在开始前我们先明白一些基本的概念。 主体（Subject）：即访问应用的用户，在Shiro中使用Subject代表该用户。用户只有授权后才允许访问相应的资源。 资源（Resource）：在应用中用户可以访问的任何东西，比如访问JSP页面、查看/编辑某些数据、访问某个业务方法、打印文本等等都是资源。用户只要授权后才能访问。 权限（Permission）：安全策略中的原子授">
+<meta name="keywords" content="Shiro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用Hexo搭建个人博客">
-<meta property="og:url" content="http://yoursite.com/2017/12/21/利用Hexo搭建个人博客/index.html">
+<meta property="og:title" content="《跟我学Shiro》学习笔记 第三章:授权">
+<meta property="og:url" content="http://yoursite.com/2018/04/16/《跟我学shiro》学习笔记-第三章/index.html">
 <meta property="og:site_name" content="赵军的博客">
-<meta property="og:description" content="前言想自己弄个博客做一下学习记录,以及分享学习心得,了解到github的pages功能,然后选择了Hexo,期间遇到了一些问题.写此博客记录一下.文章包含以下内容:    安装NodeJs   安装hexo   初始化   生成静态页面   本地启动   更换主题   部署到github 更改头像 新建文章  安装NodeJs访问NodeJs官网下载页面选择合适的版本进行下载.   安装hexo$">
-<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com/home.png">
-<meta property="og:updated_time" content="2017-12-25T11:22:45.500Z">
+<meta property="og:description" content="前言本章我们来学习权限认证，在开始前我们先明白一些基本的概念。 主体（Subject）：即访问应用的用户，在Shiro中使用Subject代表该用户。用户只有授权后才允许访问相应的资源。 资源（Resource）：在应用中用户可以访问的任何东西，比如访问JSP页面、查看/编辑某些数据、访问某个业务方法、打印文本等等都是资源。用户只要授权后才能访问。 权限（Permission）：安全策略中的原子授">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B.png">
+<meta property="og:updated_time" content="2018-04-20T03:31:32.461Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用Hexo搭建个人博客">
-<meta name="twitter:description" content="前言想自己弄个博客做一下学习记录,以及分享学习心得,了解到github的pages功能,然后选择了Hexo,期间遇到了一些问题.写此博客记录一下.文章包含以下内容:    安装NodeJs   安装hexo   初始化   生成静态页面   本地启动   更换主题   部署到github 更改头像 新建文章  安装NodeJs访问NodeJs官网下载页面选择合适的版本进行下载.   安装hexo$">
-<meta name="twitter:image" content="http://oucja4p5v.bkt.clouddn.com/home.png">
+<meta name="twitter:title" content="《跟我学Shiro》学习笔记 第三章:授权">
+<meta name="twitter:description" content="前言本章我们来学习权限认证，在开始前我们先明白一些基本的概念。 主体（Subject）：即访问应用的用户，在Shiro中使用Subject代表该用户。用户只有授权后才允许访问相应的资源。 资源（Resource）：在应用中用户可以访问的任何东西，比如访问JSP页面、查看/编辑某些数据、访问某个业务方法、打印文本等等都是资源。用户只要授权后才能访问。 权限（Permission）：安全策略中的原子授">
+<meta name="twitter:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B.png">
   
     <link rel="alternative" href="/atom.xml" title="赵军的博客" type="application/atom+xml">
   
@@ -156,230 +156,182 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-利用Hexo搭建个人博客" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-《跟我学shiro》学习笔记-第三章" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      利用Hexo搭建个人博客
+      《跟我学Shiro》学习笔记 第三章:授权
     </h1>
   
 
         
-        <a href="/2017/12/21/利用Hexo搭建个人博客/" class="archive-article-date">
-  	<time datetime="2017-12-21T15:17:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
+        <a href="/2018/04/16/《跟我学shiro》学习笔记-第三章/" class="archive-article-date">
+  	<time datetime="2018-04-16T09:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-16</time>
 </a>
         
       </header>
     
 	<!-- 目录内容 -->
 
-    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-          <span class="btn-bg"></span>
-          <span class="btn-text">文章导航</span>
-          </p>
-	<div id="toc-article" class="toc-article">
-	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-		<strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装NodeJs"><span class="toc-number">2.</span> <span class="toc-text">安装NodeJs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装hexo"><span class="toc-number">3.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">4.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成静态页面"><span class="toc-number">5.</span> <span class="toc-text">生成静态页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地启动"><span class="toc-number">6.</span> <span class="toc-text">本地启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更换主题"><span class="toc-number">7.</span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github"><span class="toc-number">8.</span> <span class="toc-text">部署到github</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改头像"><span class="toc-number">9.</span> <span class="toc-text">更改头像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建文章"><span class="toc-number">10.</span> <span class="toc-text">新建文章</span></a></li></ol>
-         </div>
-   <script type="text/javascript">
-	function showToc(){
-		var toc_article = document.getElementById("toc-article");
-		var show_toc_btn = document.getElementById("show-toc-btn");
-		toc_article.setAttribute("style","display:block");
-		show_toc_btn.setAttribute("style","display:none");
-		};
-	function showBtn(){
-		var toc_article = document.getElementById("toc-article");
-		var show_toc_btn = document.getElementById("show-toc-btn");
-		toc_article.setAttribute("style","display:none");
-		show_toc_btn.setAttribute("style","display:block");
-		};
-   </script>
-      
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想自己弄个博客做一下学习记录,以及分享学习心得,了解到github的pages功能,然后选择了Hexo,期间遇到了一些问题.写此博客记录一下.<br>文章包含以下内容:  </p>
-<ol>
-<li>安装NodeJs  </li>
-<li>安装hexo  </li>
-<li>初始化  </li>
-<li>生成静态页面  </li>
-<li>本地启动  </li>
-<li>更换主题  </li>
-<li>部署到github</li>
-<li>更改头像</li>
-<li>新建文章</li>
-</ol>
-<h3 id="安装NodeJs"><a href="#安装NodeJs" class="headerlink" title="安装NodeJs"></a>安装NodeJs</h3><p>访问<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">NodeJs官网下载页面</a>选择合适的版本进行下载.  </p>
-<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><pre><code>$ npm install -g hexo
-</code></pre><p>然后输入命令<code>hexo -v</code> 若输出hexo的版本号即为安装成功.</p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>在某个目录下新建一个项目文件夹(比如blog),然后进入blog目录,以下所有的命令操作也都是在这个目录下进行的.</p>
-<pre><code>hexo init
-</code></pre><h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><p>初始化完成之后,就可以生成hexo默认的hello world文章了.现在执行以下命令把文章编译为静态页面.</p>
-<pre><code>hexo generate
-</code></pre><h3 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h3><p>把文章编译为静态页面后,需要执行以下命令启动本地的服务,在浏览器中输入<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>查看页面生成的效果.</p>
-<pre><code>hexo server
-</code></pre><p>显示的效果如果是这样的话那么就成功了.</p>
-<p><img src="http://oucja4p5v.bkt.clouddn.com/home.png" alt="效果图"></p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本章我们来学习权限认证，在开始前我们先明白一些基本的概念。</p>
+<p><strong>主体（</strong>Subject<strong>）</strong>：即访问应用的用户，在Shiro中使用Subject代表该用户。用户只有授权后才允许访问相应的资源。</p>
+<p><strong>资源（</strong>Resource<strong>）</strong>：在应用中用户可以访问的任何东西，比如访问JSP页面、查看/编辑某些数据、访问某个业务方法、打印文本等等都是资源。用户只要授权后才能访问。</p>
+<p><strong>权限（</strong>Permission<strong>）</strong>：安全策略中的原子授权单位，通过权限我们可以表示在应用中用户有没有操作某个资源的权力。即权限表示在应用中用户能不能访问某个资源，如：访问用户列表页面、查看/新增/修改/删除用户数据（即很多时候都是CRUD（增查改删）式权限控制）等等。</p>
+<p>如上可以看出，权限代表了用户有没有操作某个资源的权利，即反映在某个资源上的操作允不允许，不反映谁去执行这个操作。所以后续还需要把权限赋予给用户，即定义哪个用户允许在某个资源上做什么操作（权限），Shiro不会去做这件事情，而是由实现人员提供。</p>
 <a id="more"></a>
-<p><code>注:如果启动后访问不了,有可能是端口被占用,查找到是哪个进程占用了4000端口,kill掉就好了.</code></p>
-<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>上面的博客效果是hexo自己默认的主题 <code>landscape</code> ,我选择的是 <code>yilia</code> 这个主题.  </p>
-<p>在目录下执行clone命令:</p>
-<pre><code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
-</code></pre><p>修改 <code>blog/_config.yml</code> 文件：</p>
-<pre><code>theme: yilia    //默认为landscape
-</code></pre><p>修改 <code>themes/yilia/_config.yml</code> 文件：</p>
-<pre><code># Header
-
-menu:
-  主页: /
-  随笔: /tags/随笔/
-
-# SubNav
-subnav:
-  github: &quot;https://github.com/zhaojun0193&quot;
-  weibo: &quot;https://weibo.com/u/3884931222&quot;
-  rss: &quot;#&quot;
-  zhihu: &quot;#&quot;
-  #qq: &quot;#&quot;
-  #weixin: &quot;#&quot;
-  #jianshu: &quot;#&quot;
-  #douban: &quot;#&quot;
-  #segmentfault: &quot;#&quot;
-  #bilibili: &quot;#&quot;
-  #acfun: &quot;#&quot;
-  #mail: &quot;mailto:litten225@qq.com&quot;
-  #facebook: &quot;#&quot;
-  #google: &quot;#&quot;
-  #twitter: &quot;#&quot;
-  #linkedin: &quot;#&quot;
-
-rss: /atom.xml
-
-# 是否需要修改 root 路径
-# 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
-# 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
-root: /
-
-# Content
-
-# 文章太长，截断按钮文字
-excerpt_link: more
-# 文章卡片右下角常驻链接，不需要请设置为false
-show_all_link: &apos;展开全文&apos;
-# 数学公式
-mathjax: false
-# 是否在新窗口打开链接
-open_in_new: false
-
-# 打赏
-# 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 2
-# 打赏wording
-reward_wording: &apos;谢谢你请我吃糖果&apos;
-# 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
-alipay: /img/alipay.jpg
-# 微信二维码图片地址
-weixin: /img/wechatpay.jpg
-
-# 目录
-# 目录设定：0-不显示目录； 1-文章对应的md文件里有toc:true属性，才有目录； 2-所有文章均显示目录
-toc: 1
-# 根据自己的习惯来设置，如果你的目录标题习惯有标号，置为true即可隐藏hexo重复的序号；否则置为false
-toc_hide_index: true
-# 目录为空时的提示
-toc_empty_wording: &apos;目录，不存在的…&apos;
-
-# 是否有快速回到顶部的按钮
-top: true
-
-# Miscellaneous
-baidu_analytics: &apos;&apos;
-google_analytics: &apos;&apos;
-favicon: /img/favicon.ico
-
-#你的头像url
-avatar: /img/my.jpg
-
-#是否开启分享
-share_jia: true
-
-#评论：1、多说；2、网易云跟帖；3、畅言；4、Disqus；5、Gitment
-#不需要使用某项，直接设置值为false，或注释掉
-#具体请参考wiki：https://github.com/litten/hexo-theme-yilia/wiki/
-
-#1、多说
-duoshuo: false
-
-#2、网易云跟帖
-wangyiyun: false
-
-#3、畅言
-changyan_appid: false
-changyan_conf: false
-
-#4、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
-disqus: false
-
-#5、Gitment
-gitment_owner: false      #你的 GitHub ID
-gitment_repo: &apos;&apos;          #存储评论的 repo
-gitment_oauth:
-  client_id: &apos;&apos;           #client ID
-  client_secret: &apos;&apos;       #client secret
-
-# 样式定制 - 一般不需要修改，除非有很强的定制欲望…
-style:
-  # 头像上面的背景颜色
-  header: &apos;#4d4d4d&apos;
-  # 右滑板块背景
-  slider: &apos;linear-gradient(200deg,#a0cfe4,#e8c37e)&apos;
-
-# slider的设置
-slider:
-  # 是否默认展开tags板块
-  showTags: false
-
-# 智能菜单
-# 如不需要，将该对应项置为false
-# 比如
-#smart_menu:
-#  friends: false
-smart_menu:
-  innerArchive: &apos;所有文章&apos;
-  friends: &apos;友链&apos;
-  aboutme: &apos;关于我&apos;
-
-friends:
-  CSDN: https://www.csdn.net/
-  博客园: https://www.cnblogs.com/
-
-aboutme: 很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家
-</code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>部署之前先修改 <code>blog/_config.yml</code> 文件</p>
-<pre><code>deploy:
-  type: git
-  repository: https://github.com/zhaojun0193/zhaojun0193.github.com.git
-  branch: master
-</code></pre><p><code>注：在hexo3.x版本下，这里的type应该填git，不是github；另外冒号后面都有一个英文的空格，不然会报错的。</code></p>
-<p>然后使用以下命令进行部署</p>
-<pre><code>hexo deploy
-</code></pre><p><code>注：如果执行上述命令报错，你可以试试下面这个命令再试</code></p>
-<pre><code>npm install hexo-deployer-git--save
-</code></pre><p>部署成功后输入<a href="https://zhaojun0193.github.io" target="_blank" rel="noopener">https://zhaojun0193.github.io</a>进行访问</p>
-<h3 id="更改头像"><a href="#更改头像" class="headerlink" title="更改头像"></a>更改头像</h3><p>在 <code>\blog\themes\yilia\source\img</code> 下放入你的头像图片(如:head.jpg),然后修改 <code>themes/yilia/_config.yml</code> 文件`:</p>
-<pre><code>#你的头像url
-avatar: /img/my.jpg
-</code></pre><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><p>文章都保存在 <code>\blog\source\_posts</code>目录下<br>可以使用一下命令来新建文章</p>
-<pre><code>hexo new &apos;文章标题&apos;
-</code></pre><p>然后就是利用markdown编辑器修改文章,然后发布就好啦~</p>
+<p><strong>角色</strong>（Role）：角色代表了操作集合，可以理解为权限的集合，一般情况下我们会赋予用户角色而不是权限，即这样用户可以拥有一组权限，赋予权限时比较方便。典型的如：项目经理、技术总监、CTO、开发工程师等都是角色，不同的角色拥有一组不同的权限。</p>
+<p><strong>隐试式角色</strong>：即直接通过角色来验证用户有没有操作权限，粒度较粗。</p>
+<p><strong>显示角色</strong>：在程序中通过权限控制谁能访问某个资源，角色聚合一组权限集合；这样假设哪个角色不能访问某个资源，只需要从角色代表的权限集合中移除即可；无须修改多处代码；即</p>
+<p>粒度是以资源/实例为单位的；粒度较细。</p>
+<p>请google搜索“RBAC”和“RBAC新解”分别了解“基于角色的访问控制”“基于资源的访问控制(Resource-Based Access Control)”。</p>
+<h4 id="3-1授权方式"><a href="#3-1授权方式" class="headerlink" title="3.1授权方式"></a>3.1授权方式</h4><p>Shiro支持三种授权方式：</p>
+<ul>
+<li><p>编程式：通过写if/else授权代码块完成： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Subject subject = SecurityUtils.getSubject();  </span><br><span class="line"><span class="keyword">if</span>(subject.hasRole(“admin”)) &#123;  </span><br><span class="line">    <span class="comment">//有权限  </span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">    <span class="comment">//无权限  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注解式：通过在执行的Java方法上放置相应的注解完成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresRoles</span>(<span class="string">"admin"</span>)  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="comment">//有权限  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有权限将抛出相应异常。</p>
+</li>
+<li><p>JSP/GSP标签：在JSP/GSP页面通过相应的标签完成：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">shiro:hasRole</span> <span class="attr">name</span>=<span class="string">"admin"</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">!—</span> 有权限 —&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">shiro:hasRole</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>后面会详细介绍如何使用。</p>
+</li>
+</ul>
+<h4 id="3-2授权"><a href="#3-2授权" class="headerlink" title="3.2授权"></a>3.2授权</h4><ul>
+<li><p><strong>3.2.1 基于角色的访问控制（隐式角色）</strong></p>
+<ol>
+<li><p>在ini配置文件配置用户拥有的角色（shiro-role.ini）</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span>  </span><br><span class="line"><span class="attr">zhang</span>=<span class="number">123</span>,role1,role2  </span><br><span class="line"><span class="attr">wang</span>=<span class="number">123</span>,role1</span><br></pre></td></tr></table></figure>
+<p>规则即：“用户名=密码,角色1，角色2”，如果需要在应用中判断用户是否有相应角色，就需要在相应的Realm中返回角色信息，也就是说Shiro不负责维护用户-角色信息，需要应用提供，Shiro只是提供相应的接口方便验证，后续会介绍如何动态的获取用户角色。</p>
+</li>
+<li><p>测试用例（com.zhaojun.shiro.chapter3.RoleTest.testHasRole()）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHasRole</span><span class="params">()</span></span>&#123;</span><br><span class="line">       String username = <span class="string">"wang"</span>;</span><br><span class="line">       String password = <span class="string">"123"</span>;</span><br><span class="line">       <span class="comment">//登录</span></span><br><span class="line">       login(<span class="string">"classpath:shiro-role.ini"</span>,username,password);</span><br><span class="line">       <span class="comment">//判断是否拥有角色</span></span><br><span class="line">       log.info(username + <span class="string">"是否拥有角色role1:"</span>+SecurityUtils.getSubject().hasRole(<span class="string">"role1"</span>));</span><br><span class="line">       log.info(username + <span class="string">"是否拥有角色role2:"</span>+SecurityUtils.getSubject().hasRole(<span class="string">"role2"</span>));</span><br><span class="line">       log.info(username + <span class="string">"是否拥有角色role1与role2:"</span>+</span><br><span class="line">               Arrays.toString(SecurityUtils.getSubject().hasRoles(Arrays.asList(<span class="string">"role1"</span>,<span class="string">"role2"</span>))));</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>输出日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">21:45:02.389 [main] INFO  com.zhaojun.shiro.chapter3.RoleTest - wang是否拥有角色role1:true</span><br><span class="line">21:45:02.390 [main] INFO  com.zhaojun.shiro.chapter3.RoleTest - wang是否拥有角色role2:false</span><br><span class="line">21:45:02.391 [main] INFO  com.zhaojun.shiro.chapter3.RoleTest - wang是否拥有角色role1与role2:[true, false]</span><br></pre></td></tr></table></figure>
+<p>Shiro提供了hasRole/hasRole用于判断用户是否拥有某个角色/某些权限；但是没有提供如hashAnyRole用于判断是否有某些权限中的某一个。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>(expected = UnauthorizedException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCheckRole</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String username = <span class="string">"wang"</span>;</span><br><span class="line">        String password = <span class="string">"123"</span>;</span><br><span class="line">        <span class="comment">//登录</span></span><br><span class="line">        login(<span class="string">"classpath:shiro-role.ini"</span>,username,password);</span><br><span class="line">        <span class="comment">//断言拥有角色</span></span><br><span class="line">        SecurityUtils.getSubject().checkRole(<span class="string">"role2"</span>);</span><br><span class="line"></span><br><span class="line">        SecurityUtils.getSubject().checkRoles(<span class="string">"role1"</span>,<span class="string">"role2"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Shiro提供的checkRole/checkRoles和hasRole/hasAllRoles不同的地方是它在判断为假的情况下会抛出UnauthorizedException异常。</p>
+</li>
+</ol>
+<p>到此基于角色的访问控制（即隐式角色）就完成了，这种方式的缺点就是如果很多地方进行了角色判断，但是有一天不需要了那么就需要修改相应代码把所有相关的地方进行删除；这就是粗粒度造成的问题。</p>
+</li>
+<li><p><strong>3.2.2基于资源的访问控制（显示角色）</strong></p>
+<ol>
+<li><p>在ini配置文件配置用户拥有的角色及角色-权限关系（shiro-permission.ini） </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span></span><br><span class="line"><span class="attr">zhang</span>=<span class="number">123</span>,role1,role2</span><br><span class="line"><span class="attr">wang</span>=<span class="number">123</span>,role1</span><br><span class="line"><span class="section">[roles]</span></span><br><span class="line"><span class="attr">role1</span>=user:create,user:update</span><br><span class="line"><span class="attr">roel2</span>=user:create,user:delete</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试用例（com.zhaojun.shiro.chapter3.PermissionTest.testPermission()）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPermission</span><span class="params">()</span></span>&#123;</span><br><span class="line">       String username = <span class="string">"zhang"</span>;</span><br><span class="line">       String password = <span class="string">"123"</span>;</span><br><span class="line">       login(<span class="string">"classpath:shiro-permission.ini"</span>,username,password);</span><br><span class="line">       <span class="comment">//判断是否拥有权限</span></span><br><span class="line">       log.info(username + <span class="string">"是否拥有user:create权限："</span>+SecurityUtils.getSubject().isPermitted(<span class="string">"user:create"</span>));</span><br><span class="line">       log.info(username+<span class="string">"："</span>+SecurityUtils.getSubject().isPermittedAll(<span class="string">"user:create"</span>,<span class="string">"user:update"</span>));</span><br><span class="line">       log.info(username + <span class="string">"是否拥有user:delete权限："</span>+SecurityUtils.getSubject().isPermitted(<span class="string">"user:delete"</span>));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>Shiro提供了isPermitted和isPermittedAll用于判断用户是否拥有某个权限或所有权限，也没有提供如isPermittedAny用于判断拥有某一个权限的接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>(expected = UnauthorizedException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCheckPermission</span><span class="params">()</span></span>&#123;</span><br><span class="line">        login(<span class="string">"classpath:shiro-permission.ini"</span>, <span class="string">"zhang"</span>, <span class="string">"123"</span>);</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        <span class="comment">//断言拥有权限：user:create</span></span><br><span class="line">        subject.checkPermission(<span class="string">"user:create"</span>);</span><br><span class="line">        <span class="comment">//断言拥有权限：user:delete and user:update</span></span><br><span class="line">        subject.checkPermissions(<span class="string">"user:delete"</span>, <span class="string">"user:update"</span>);</span><br><span class="line">        <span class="comment">//断言拥有权限：user:view 失败抛出异常</span></span><br><span class="line">        subject.checkPermissions(<span class="string">"user:view"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>与checkRole一样，若没有相应权限会抛出UnauthorizedException异常。</p>
+<p>到此基于资源的访问控制（显示角色）就完成了，也可以叫基于权限的访问控制，这种方式的一般规则是“资源标识符：操作”，即是资源级别的粒度；这种方式的好处就是如果要修改基本都是一个资源级别的修改，不会对其他模块代码产生影响，粒度小。但是实现起来可能稍微复杂点，需要维护“用户——角色，角色——权限（资源：操作）”之间的关系。  </p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="3-3-Permission"><a href="#3-3-Permission" class="headerlink" title="3.3 Permission"></a>3.3 Permission</h4><h5 id="字符串权限通配"><a href="#字符串权限通配" class="headerlink" title="字符串权限通配"></a>字符串权限通配</h5><p>规则：“资源标识符：操作：对象实例ID”  即对哪个资源的哪个实例可以进行什么操作。其默认支持通配符权限字符串，“:”表示资源/操作/实例的分割；“,”表示操作的分割；“*”表示任意资源/操作/实例。</p>
+<ul>
+<li><p><strong>3.3.1 单个资源单个权限</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"system:user:update"</span>);</span><br></pre></td></tr></table></figure>
+<p>用户拥有资源“system:user”的“update”权限。</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>3.3.2 单个资源多个权限</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role41</span>=system:user:update,system:user:delete</span><br></pre></td></tr></table></figure>
+<p>然后通过如下代码判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"system:user:update"</span>, <span class="string">"system:user:delete"</span>);</span><br></pre></td></tr></table></figure>
+<p>用户拥有资源“system:user”的“update”和“delete”权限。如上可以简写成：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role42</span>=<span class="string">"system:user:update,delete"</span></span><br></pre></td></tr></table></figure>
+<p>接着可以通过如下代码判断 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"system:user:update,delete"</span>);</span><br></pre></td></tr></table></figure>
+<p>通过“system:user:update,delete”验证”system:user:update, system:user:delete”是没问题的，但是反过来是规则不成立。</p>
+</li>
+<li><p><strong>3.3.3 单个资源全部权限</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role51</span>=<span class="string">"system:user:create,update,delete,view"</span></span><br></pre></td></tr></table></figure>
+<p>然后通过如下代码判断 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"system:user:create,delete,update:view"</span>);</span><br></pre></td></tr></table></figure>
+<p>用户拥有资源“system:user”的“create”、“update”、“delete”和“view”所有权限。如上可以简写成：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role52</span>=system:user:*</span><br></pre></td></tr></table></figure>
+<p>表示角色52拥有system:user的所有权限。如上可以简写成（推荐上面的写法）：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role53</span>=system:user</span><br></pre></td></tr></table></figure>
+<p>然后通过如下代码判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"system:user:*"</span>);  </span><br><span class="line">subject.checkPermissions(<span class="string">"system:user"</span>);</span><br></pre></td></tr></table></figure>
+<p>通过“system:user:*”验证“system:user:create,delete,update:view”可以，但是反过来是不成立的。</p>
+</li>
+<li><p><strong>3.3.4 所有资源全部权限</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role61</span>=*:view</span><br></pre></td></tr></table></figure>
+<p>然后通过如下代码判断:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"user:view"</span>);</span><br></pre></td></tr></table></figure>
+<p>用户拥有所有资源的“view”所有权限。假设判断的权限是“”system:user:view”，那么需要“role5=<em>:</em>:view”这样写才行。</p>
+</li>
+<li><p><strong>3.3.5实例级别的权限</strong></p>
+<ol>
+<li><p>单个实例权限</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role71</span>=user:view:<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>对资源user的1实例拥有view权限。</p>
+<p>然后通过如下代码判断 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"user:view:1"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单个实例多个权限</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role72</span>=<span class="string">"user:update,delete:1"</span></span><br></pre></td></tr></table></figure>
+<p>对资源user的1实例拥有update、delete权限。</p>
+<p>然后通过如下代码判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubject.checkPermissions(<span class="string">"user:delete,update:1"</span>);  </span><br><span class="line">subject.checkPermissions(<span class="string">"user:update:1"</span>, <span class="string">"user:delete:1"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单个实例所有权限</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role73</span>=user:*:<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>对资源user的1实例拥有所有权限。</p>
+<p>然后通过如下代码判断 :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"user:auth:1"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所有实例所有权限</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">role74</span>=user:*:*</span><br></pre></td></tr></table></figure>
+<p>对资源user的1实例拥有所有权限。</p>
+<p>然后通过如下代码判断 :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermissions(<span class="string">"user:view:1"</span>, <span class="string">"user:auth:2"</span>);</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+</li>
+<li><p><strong>3.3.6 Shiro 对权限字符串缺失部分的处理</strong></p>
+<p>如“user:view”等价于“user:view:<em>”；而“organization”等价于“organization:</em>”或者“organization:<em>:</em>”。可以这么理解，这种方式实现了前缀匹配。</p>
+<p>另外如“user:<em>”可以匹配如“user:delete”、“user:delete”可以匹配如“user:delete:1”、“user:</em>:1”可以匹配如“user:view:1”、“user”可以匹配“user:view”或“user:view:1”等。即<em>可以匹配所有，不加</em>可以进行前缀匹配；但是如“<em>:view”不能匹配“system:user:view”，需要使用“</em>:<em>:view”，即后缀匹配必须指定前缀（多个冒号就需要多个</em>来匹配）。</p>
+</li>
+<li><p><strong>3.3.7WildcardPermission</strong></p>
+<p>如下两种方式是等价的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subject.checkPermission(<span class="string">"menu:view:1"</span>);  </span><br><span class="line">subject.checkPermission(<span class="keyword">new</span> WildcardPermission(<span class="string">"menu:view:1"</span>));</span><br></pre></td></tr></table></figure>
+<p>因此没什么必要的话使用字符串更方便。</p>
+<p>​    </p>
+</li>
+</ul>
+<h4 id="3-4授权流程"><a href="#3-4授权流程" class="headerlink" title="3.4授权流程"></a>3.4授权流程</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B.png" alt="授权流程"></p>
+<p>流程如下：</p>
+<p>1、首先调用Subject.isPermitted<em>/hasRole</em>接口，其会委托给SecurityManager，而SecurityManager接着会委托给Authorizer；</p>
+<p>2、Authorizer是真正的授权者，如果我们调用如isPermitted(“user:view”)，其首先会通过PermissionResolver把字符串转换成相应的Permission实例；</p>
+<p>3、在进行授权之前，其会调用相应的Realm获取Subject相应的角色/权限用于匹配传入的角色/权限；</p>
+<p>4、Authorizer会判断Realm的角色/权限是否和传入的匹配，如果有多个Realm，会委托给ModularRealmAuthorizer进行循环判断，如果匹配如isPermitted<em>/hasRole</em>会返回true，否则返回false表示授权失败。</p>
+<p>ModularRealmAuthorizer进行多Realm匹配流程：</p>
+<p>1、首先检查相应的Realm是否实现了实现了Authorizer；</p>
+<p>2、如果实现了Authorizer，那么接着调用其相应的isPermitted<em>/hasRole</em>接口进行匹配；</p>
+<p>3、如果有一个Realm匹配那么将返回true，否则返回false。</p>
+<p>如果Realm进行授权的话，应该继承AuthorizingRealm，其流程是：</p>
+<p>1.1、如果调用hasRole*，则直接获取AuthorizationInfo.getRoles()与传入的角色比较即可；</p>
+<p>1.2、首先如果调用如isPermitted(“user:view”)，首先通过PermissionResolver将权限字符串转换成相应的Permission实例，默认使用WildcardPermissionResolver，即转换为通配符的WildcardPermission；</p>
+<p>2、通过AuthorizationInfo.getObjectPermissions()得到Permission实例集合；通过AuthorizationInfo. getStringPermissions()得到字符串集合并通过PermissionResolver解析为Permission实例；然后获取用户的角色，并通过RolePermissionResolver解析角色对应的权限集合（默认没有实现，可以自己提供）；</p>
+<p>3、接着调用Permission. implies(Permission p)逐个与传入的权限比较，如果有匹配的则返回true，否则false。 </p>
 <hr>
-<p>本文地址是：<a href="https://zhaojun0193.github.io/2017/12/21/%E5%88%A9%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">利用Hexo搭建个人博客</a> 转载请注明原创地址。</p>
-<p>参考博文:<br><a href="http://visugar.com/2017/05/04/20170504SetUpHexoBlog/" target="_blank" rel="noopener">http://visugar.com/2017/05/04/20170504SetUpHexoBlog/</a><br><a href="http://blog.csdn.net/scythe666/article/details/51956821" target="_blank" rel="noopener">http://blog.csdn.net/scythe666/article/details/51956821</a></p>
+<p>张开涛的博客：<a href="http://jinnianshilongnian.iteye.com/category/305053" target="_blank" rel="noopener">http://jinnianshilongnian.iteye.com/category/305053</a></p>
+<p>我的博客：<a href="https://zhaojun0193.github.io" target="_blank" rel="noopener">https://zhaojun0193.github.io</a></p>
+<p>本文代码地址：<a href="https://github.com/zhaojun0193/shiro-example" target="_blank" rel="noopener">https://github.com/zhaojun0193/shiro-example</a></p>
 
       
 
@@ -424,7 +376,7 @@ avatar: /img/my.jpg
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shiro</a>
         		</li>
       		
 		</ul>
@@ -480,7 +432,7 @@ avatar: /img/my.jpg
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/21/利用Hexo搭建个人博客/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/16/《跟我学shiro》学习笔记-第三章/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -494,15 +446,11 @@ avatar: /img/my.jpg
   
 <nav id="article-nav">
   
-    <a href="/2017/12/25/ilog-本地执行规则/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ilog 本地执行规则
-        
-      </div>
-    </a>
   
+    <a href="/2018/04/13/《跟我学shiro》学习笔记-第二章/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《跟我学Shiro》学习笔记 第二章:身份验证</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -519,19 +467,6 @@ avatar: /img/my.jpg
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装NodeJs"><span class="toc-number">2.</span> <span class="toc-text">安装NodeJs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装hexo"><span class="toc-number">3.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">4.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成静态页面"><span class="toc-number">5.</span> <span class="toc-text">生成静态页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地启动"><span class="toc-number">6.</span> <span class="toc-text">本地启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更换主题"><span class="toc-number">7.</span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github"><span class="toc-number">8.</span> <span class="toc-text">部署到github</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改头像"><span class="toc-number">9.</span> <span class="toc-text">更改头像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建文章"><span class="toc-number">10.</span> <span class="toc-text">新建文章</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
