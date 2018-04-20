@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: SpringMVC | 赵军的博客</title>
+  <title>Hibernate4 JPA注解详解（上） | 赵军的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="赵军的博客">
-<meta property="og:url" content="http://yoursite.com/tags/SpringMVC/index.html">
+  <meta name="description" content="前言本期我们对Hibernate JPA注解的配置进行说明，这些注解如何使用，如何配置等等。 @TableTable 用来定义 entity 主表的 name，catalog，schema 等属性。 属性说明：  name：表名 catalog：对应数据库的catalog schema：对应关系数据库中的schema UniqueConstraints：定义一个 UniqueConstraint">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate4 JPA注解详解（上）">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/Hibernate4-JPA注解详解（上）/index.html">
 <meta property="og:site_name" content="赵军的博客">
+<meta property="og:description" content="前言本期我们对Hibernate JPA注解的配置进行说明，这些注解如何使用，如何配置等等。 @TableTable 用来定义 entity 主表的 name，catalog，schema 等属性。 属性说明：  name：表名 catalog：对应数据库的catalog schema：对应关系数据库中的schema UniqueConstraints：定义一个 UniqueConstraint">
+<meta property="og:updated_time" content="2018-04-20T08:32:57.571Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赵军的博客">
+<meta name="twitter:title" content="Hibernate4 JPA注解详解（上）">
+<meta name="twitter:description" content="前言本期我们对Hibernate JPA注解的配置进行说明，这些注解如何使用，如何配置等等。 @TableTable 用来定义 entity 主表的 name，catalog，schema 等属性。 属性说明：  name：表名 catalog：对应数据库的catalog schema：对应关系数据库中的schema UniqueConstraints：定义一个 UniqueConstraint">
   
     <link rel="alternative" href="/atom.xml" title="赵军的博客" type="application/atom+xml">
   
@@ -149,60 +154,296 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Hibernate4-JPA注解详解（上）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/11/SpringMVC实现Restful接口/" class="archive-article-date">
-  	<time datetime="2018-04-11T04:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/11/SpringMVC实现Restful接口/">SpringMVC实现RESTful接口,关于静态资源的访问</a>
+    <h1 class="article-title" itemprop="name">
+      Hibernate4 JPA注解详解（上）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/04/20/Hibernate4-JPA注解详解（上）/" class="archive-article-date">
+  	<time datetime="2018-04-20T06:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
+</a>
+        
+      </header>
+    
+	<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本期我们对Hibernate JPA注解的配置进行说明，这些注解如何使用，如何配置等等。</p>
+<h4 id="Table"><a href="#Table" class="headerlink" title="@Table"></a>@Table</h4><p>Table 用来定义 entity 主表的 name，catalog，schema 等属性。</p>
+<p>属性说明：</p>
+<ul>
+<li>name：表名</li>
+<li>catalog：对应数据库的catalog</li>
+<li>schema：对应关系数据库中的schema</li>
+<li>UniqueConstraints：定义一个 UniqueConstraint 数组，指定需要建唯一约束的列</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name=<span class="string">"CUST"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="SecondaryTable"><a href="#SecondaryTable" class="headerlink" title="@SecondaryTable"></a>@SecondaryTable</h4><p>一个 entity class 可以映射到多表，SecondaryTable 用来定义单个从表的名字，主键名字等属性。<br>属性说明：</p>
+<a id="more"></a>
+<ul>
+<li>name：表名</li>
+<li>catalog：对应关系数据库中的 catalog</li>
+<li>pkJoin：定义一个 PrimaryKeyJoinColumn 数组，指定从表的主键列</li>
+<li>UniqueConstraints：定义一个 UniqueConstraint 数组，指定需要建唯一约束的列</li>
+</ul>
+<p>下面的代码说明 Customer 类映射到两个表，主表名是 CUSTOMER，从表名是CUST_DETAIL，从表的主键列和主表的主键列类型相同，列名为 CUST_ID。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name=<span class="string">"CUSTOMER"</span>)</span><br><span class="line"><span class="meta">@SecondaryTable</span>(name=<span class="string">"CUST_DETAIL"</span>,pkJoin=<span class="meta">@PrimaryKeyJoinColumn</span>(name=<span class="string">"CUST_ID"</span>))</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="SecondaryTables"><a href="#SecondaryTables" class="headerlink" title="@SecondaryTables"></a>@SecondaryTables</h4><p>当一个 entity class 映射到一个主表和多个从表时，用 SecondaryTables 来定义各个从表的属性。<br>属性说明：</p>
+<ul>
+<li>value：定义一个 SecondaryTable 数组，指定每个从表的属性。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"CUSTOMER"</span>)</span><br><span class="line"><span class="meta">@SecondaryTables</span>( value = &#123;</span><br><span class="line">        <span class="meta">@SecondaryTable</span>(name = <span class="string">"CUST_NAME"</span>, pkJoin = &#123; <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"STMO_ID"</span>, referencedColumnName = <span class="string">"id"</span>) &#125;),</span><br><span class="line">        <span class="meta">@SecondaryTable</span>(name = <span class="string">"CUST_ADDRESS"</span>, pkJoin = &#123; <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"STMO_ID"</span>, referencedColumnName = <span class="string">"id"</span>) &#125;) &#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="UniqueConstraint"><a href="#UniqueConstraint" class="headerlink" title="@UniqueConstraint"></a>@UniqueConstraint</h4><p>UniqueConstraint 定义在 Table 或 SecondaryTable 元数据里，用来指定建表时需要建唯一约束的列。<br>属性说明：</p>
+<ul>
+<li>columnNames：定义一个字符串数组，指定要建唯一约束的列名。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name=<span class="string">"EMPLOYEE"</span>,uniqueConstraints=&#123;<span class="meta">@UniqueConstraint</span>(columnNames=&#123;<span class="string">"EMP_ID"</span>,<span class="string">"EMP_NAME"</span>&#125;)&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Column"><a href="#Column" class="headerlink" title="@Column"></a>@Column</h4><p>Column 元数据定义了映射到数据库的列的所有属性：列名，是否唯一，是否允许为空，是否允许更新等。<br>属性说明：</p>
+<ul>
+<li>unique：是否唯一</li>
+<li>nullable：是否允许为空</li>
+<li>insertable：是否允许插入</li>
+<li>updatable：是否允许更新</li>
+<li>columnDefinition：定义建表时创建此列的 DDL</li>
+<li>secondaryTable：从表名。如果此列不建在主表上（默认建在主表），该属性定义该列所在从表的名字。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"PERSONNAME"</span>, unique = <span class="keyword">true</span>, nullable = <span class="keyword">false</span>, updatable = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"PHOTO"</span>, columnDefinition = <span class="string">"BLOB NOT NULL"</span>, secondaryTable=<span class="string">"PER_PHOTO"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] picture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="JoinColumn"><a href="#JoinColumn" class="headerlink" title="@JoinColumn"></a>@JoinColumn</h4><p>如果在 entity class 的 field 上定义了关系（one2one 或 one2many 等），我们通过 JoinColumn来定义关系的属性。JoinColumn 的大部分属性和 Column 类似。<br>属性说明：</p>
+<ul>
+<li>name：另一个表指向本表的外键</li>
+</ul>
+<ul>
+<li>unique：是否唯一</li>
+<li>referencedColumnName：该列指向列的列名（建表时该列作为外键列指向关系另一端的指定列）</li>
+<li>nullable：是否允许为空</li>
+<li>insertable：是否允许插入</li>
+<li>updatable：是否允许更新</li>
+<li>columnDefinition：定义建表时创建此列的 DDL</li>
+<li>secondaryTable：从表名。如果此列不建在主表上（默认建在主表），该属性定义该<br>列所在从表的名字。</li>
+</ul>
+<p>下面的代码说明 Custom 和 Order 是一对一关系。在 Order 对应的映射表建一个名为CUST_ID 的列，该列作为外键指向 Custom 对应表中名为 ID 的列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Custom</span> </span>&#123;</span><br><span class="line">    <span class="meta">@OneToOne</span></span><br><span class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"CUST_ID"</span>, referencedColumnName = <span class="string">"ID"</span>, unique = <span class="keyword">true</span>, nullable = <span class="keyword">true</span>, updatable = <span class="keyword">true</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="JoinColumns"><a href="#JoinColumns" class="headerlink" title="@JoinColumns"></a>@JoinColumns</h4><p>如果在 entity class 的 field 上定义了关系（one2one 或 one2many 等），并且关系存在多个 JoinColumn，用 JoinColumns 定义多个 JoinColumn 的属性。<br>属性说明：</p>
+<ul>
+<li>value：定义 JoinColumn 数组，指定每个 JoinColumn 的属性。</li>
+</ul>
+<p>下面的代码说明 Custom 和 Order 是一对一关系。在 Order 对应的映射表建两列，一列名为CUST_ID，该列作为外键指向Custom对应表中名为ID的列,另一列名为CUST_NAME，该列作为外键指向 Custom 对应表中名为 NAME 的列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Custom</span> </span>&#123;</span><br><span class="line">    <span class="meta">@OneToOne</span></span><br><span class="line">    <span class="meta">@JoinColumns</span>(&#123;</span><br><span class="line">            <span class="meta">@JoinColumn</span>(name = <span class="string">"CUST_ID"</span>, referencedColumnName = <span class="string">"ID"</span>),</span><br><span class="line">            <span class="meta">@JoinColumn</span>(name = <span class="string">"CUST_NAME"</span>, referencedColumnName = <span class="string">"NAME"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Id"><a href="#Id" class="headerlink" title="@Id"></a>@Id</h4><p>声明当前 field 为映射表中的主键列。id 值的获取方式有五种：TABLE, SEQUENCE,IDENTITY, AUTO, NONE。Oracle 和 DB2 支持 SEQUENCE，SQL Server 和 Sybase 支持 IDENTITY,mysql 支持 AUTO。所有的数据库都可以指定为 AUTO，我们会根据不同数据库做转换。NONE(默认)需要用户自己指定 Id 的值。<br>属性说明：</p>
+<ul>
+<li>generate：主键值的获取类型</li>
+<li>generator：TableGenerator 的名字（当 generate=GeneratorType.TABLE 才需要指定<br>该属性）</li>
+</ul>
+<p>下面的代码声明 Task 的主键列 id 是自动增长的。(Oracle 和 DB2 从默认的 SEQUENCE取值，SQL Server 和 Sybase 该列建成 IDENTITY，mysql 该列建成 auto increment。)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"OTASK"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span>(generate = GeneratorType.AUTO)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="IdClass"><a href="#IdClass" class="headerlink" title="@IdClass"></a>@IdClass</h4><p>当 entity class 使用<a href="https://blog.csdn.net/u011781521/article/details/71083112" target="_blank" rel="noopener">复合主键</a>时，需要定义一个类作为 id class。id class 必须符合以下要求:类必须声明为 public，并提供一个声明为 public 的空构造函数。必须实现 Serializable 接，覆写 equals()和 hashCode（）方法。entity class 的所有 id field 在 id class 都要定义，且类型一样。<br>属性说明：</p>
+<ul>
+<li>value：id class 的类名</li>
+</ul>
+<p>下面的代码声明 Task 的主键列 id 是自动增长的。(Oracle 和 DB2 从默认的 SEQUENCE取值，SQL Server 和 Sybase 该列建成 IDENTITY，mysql 该列建成 auto increment。)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeePK</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    String empName;</span><br><span class="line">    Integer empAge;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EmployeePK</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123; ......&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;......&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IdClass</span>(value = com.acme.EmployeePK.class)</span><br><span class="line"><span class="meta">@Entity</span>(access = FIELD)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    String empName;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    Integer empAge;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="MapKey"><a href="#MapKey" class="headerlink" title="@MapKey"></a>@MapKey</h4><p>在一对多，多对多关系中，我们可以用 Map 来保存集合对象。默认用主键值做 key，如果使用复合主键，则用 id class 的实例做 key，如果指定了 name 属性，就用指定的 field 的值做 key。<br>属性说明：</p>
+<ul>
+<li>name：用来做 key 的 field 名字</li>
+</ul>
+<p>下面的代码说明 Person 和 Book 之间是一对多关系。Person 的 books 字段是 Map 类型，用 Book 的 isbn 字段的值作为 Map 的 key。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"PERSON"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@OneToMany</span>(targetEntity = Book.class, cascade = CascadeType.ALL, mappedy = <span class="string">"person"</span>)</span><br><span class="line">    <span class="meta">@MapKey</span>(name = <span class="string">"isbn"</span>)</span><br><span class="line">    <span class="keyword">private</span> Map books = <span class="keyword">new</span> HashMap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="MappedSuperclass"><a href="#MappedSuperclass" class="headerlink" title="@MappedSuperclass"></a>@MappedSuperclass</h4><p>使用@MappedSuperclass 指定一个实体类从中继承持久字段的超类。当多个实体类共享通用的持久字段或属性时，这将是一个方便的模式。</p>
+<p>您可以像对实体那样使用任何直接和关系映射批注（如 @Basic 和 @ManyToMany）对该超类的字段和属性进行批注，但由于没有针对该超类本身的表存在，因此这些映射只适用于它的子类。继承的持久字段或属性属于子类的表。</p>
+<p>可以在子类中使用@AttributeOverride 或@AssociationOverride 来覆盖超类的映射配置。</p>
+<p>@MappedSuperclass 没有属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如何将 Employee 指定为映射超类</span></span><br><span class="line"><span class="meta">@MappedSuperclass</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">protected</span> Integer empId;</span><br><span class="line">    <span class="meta">@Version</span></span><br><span class="line">    <span class="keyword">protected</span> Integer version;</span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"ADDR"</span>)</span><br><span class="line">    <span class="keyword">protected</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如何在实体类中使用@AttributeOverride 以覆盖超类中设置的配置。</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@AttributeOverride</span>(name = <span class="string">"address"</span>, column = <span class="meta">@Column</span>(name = <span class="string">"ADDR_ID"</span>))</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PartTimeEmployee</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"WAGE"</span>)</span><br><span class="line">    <span class="keyword">protected</span> Float hourlyWage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="PrimaryKeyJoinColumn"><a href="#PrimaryKeyJoinColumn" class="headerlink" title="@PrimaryKeyJoinColumn"></a>@PrimaryKeyJoinColumn</h4><p>在三种情况下会用到@PrimaryKeyJoinColumn</p>
+<ul>
+<li>继承。</li>
+<li>entity class 映射到一个或多个从表。从表根据主表的主键列（列名为referencedColumnName 值的列），建立一个类型一样的主键列，列名由 name 属性定义。</li>
+<li>one2one 关系，关系维护端的主键作为外键指向关系被维护端的主键，不再新建一个外键列。</li>
+</ul>
+<p>属性说明：</p>
+<ul>
+<li>name：列名。</li>
+<li>referencedColumnName：该列引用列的列名</li>
+<li>columnDefinition：定义建表时创建此列的 DDL</li>
+</ul>
+<p>下面的代码说明 Customer 映射到两个表，主表 CUSTOMER,从表 CUST_DETAIL，从表需要建立主键列 CUST_ID，该列和主表的主键列 id 除了列名不同，其他定义一样。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"CUSTOMER"</span>)</span><br><span class="line"><span class="meta">@SecondaryTable</span>(name = <span class="string">"CUST_DETAIL"</span>, pkJoin = <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"CUST_ID"</span>，referencedColumnName = <span class="string">" id"</span>))</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span>(generate = GeneratorType.AUTO)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面的代码说明 Employee 和 EmployeeInfo 是一对一关系，Employee 的主键列 id 作为外键指向 EmployeeInfo 的主键列 INFO_ID。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Table</span>(name = <span class="string">"Employee"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="meta">@OneToOne</span></span><br><span class="line">    <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"id"</span>, referencedColumnName = <span class="string">"INFO_ID"</span>)</span><br><span class="line">    EmployeeInfo info;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="PrimaryKeyJoinColumns"><a href="#PrimaryKeyJoinColumns" class="headerlink" title="@PrimaryKeyJoinColumns"></a>@PrimaryKeyJoinColumns</h4><p>如果 entity class 使用了复合主键，指定单个 PrimaryKeyJoinColumn 不能满足要求时，可<br>以用 PrimaryKeyJoinColumns 来定义多个 PrimaryKeyJoinColumn<br>属性说明：</p>
+<ul>
+<li>value： 一个 PrimaryKeyJoinColumn 数组，包含所有 PrimaryKeyJoinColumn下面的代码说明了 Employee 和 EmployeeInfo 是一对一关系。他们都使用复合主键，建表时需要在 Employee 表建立一个外键，从 Employee 的主键列 id,name 指向 EmployeeInfo的主键列 INFO_ID 和 INFO_NAME</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@IdClass</span>(EmpPK.class)</span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"EMPLOYEE"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">    <span class="meta">@OneToOne</span>(cascade = CascadeType.ALL)</span><br><span class="line">    <span class="meta">@PrimaryKeyJoinColumns</span></span><br><span class="line">    <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"id"</span>, referencedColumnName = <span class="string">"INFO_ID"</span>)</span><br><span class="line">    <span class="meta">@PrimaryKeyJoinColumn</span>(name = <span class="string">"name"</span>, referencedColumnName = <span class="string">"INFO_NAME"</span>) &#125;)</span><br><span class="line">        EmployeeInfo info;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@IdClass</span>(EmpPK.class)</span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"EMPLOYEE_INFO"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeeInfo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"INFO_ID"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"INFO_NAME"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Transient"><a href="#Transient" class="headerlink" title="@Transient"></a>@Transient</h4><p>Transient 用来注释 entity 的属性，指定的这些属性不会被持久化，也不会为这些属性建表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transient</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br></pre></td></tr></table></figure>
+<h4 id="Version"><a href="#Version" class="headerlink" title="@Version"></a>@Version</h4><p>Version 指定实体类在乐观事务中的 version 属性。在实体类重新由 EntityManager 管理并<br>且加入到乐观事务中时，保证完整性。每一个类只能有一个属性被指定为 version，version<br>属性应该映射到实体类的主表上。<br>属性说明：</p>
+<ul>
+<li>value： 一个 PrimaryKeyJoinColumn 数组，包含所有 PrimaryKeyJoinColumn下面的代码说明 versionNum 属性作为这个类的 version，映射到数据库中主表的列名是OPTLOCK</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Version</span></span><br><span class="line"><span class="meta">@Column</span>(<span class="string">"OPTLOCK"</span>)</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">getVersionNum</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> versionNum; &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>我的博客：<a href="https://zhaojun0193.github.io" target="_blank" rel="noopener">https://zhaojun0193.github.io</a></p>
+<p>本文代码地址：<a href="https://github.com/zhaojun0193/shiro-example" target="_blank" rel="noopener">https://github.com/zhaojun0193/shiro-example</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringMVC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hibernate</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/20/Hibernate4-JPA注解详解（上）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/16/《跟我学shiro》学习笔记-第三章/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《跟我学Shiro》学习笔记 第三章:授权</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -225,9 +466,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
