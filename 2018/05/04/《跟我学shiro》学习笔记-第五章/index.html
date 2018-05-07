@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png">
-<meta property="og:updated_time" content="2018-05-07T07:56:59.237Z">
+<meta property="og:updated_time" content="2018-05-07T07:59:15.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《跟我学Shiro》学习笔记 第五章:Realm及相关对象">
 <meta name="twitter:description" content="5.1 Realm前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。  1、定义实体及关系   即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体">
@@ -192,6 +192,7 @@
 <p>角色实体包括：、编号(id)、角色标识符（role）、描述（description）、是否可用（available）；其中角色标识符用于在程序中进行隐式角色判断的，描述用于以后再前台界面显示的、是否可用表示角色当前是否激活。</p>
 <p>权限实体包括：编号（id）、权限标识符（permission）、描述（description）、是否可用（available）；含义和角色实体类似不再阐述</p>
 <p>另外还有两个关系实体：用户-角色实体（用户编号、角色编号，且组合为复合主键）；角色-权限实体（角色编号、权限编号，且组合为复合主键）。</p>
+<a id="more"></a>
 <p>* sql以及实体类的实例，我已上传至github，文末会给出链接。</p>
 <p>2、<strong>环境准备</strong> </p>
 <p>为了方便数据库操作，使用了“org.springframework: spring-jdbc: 4.0.0.RELEASE”依赖。</p>
@@ -524,7 +525,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,19 +537,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ilog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
