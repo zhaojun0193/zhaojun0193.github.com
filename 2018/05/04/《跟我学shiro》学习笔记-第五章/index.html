@@ -6,14 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Hibernate | 赵军的博客</title>
+  <title>《跟我学Shiro》学习笔记 第五章:Realm及相关对象 | 赵军的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="赵军的博客">
-<meta property="og:url" content="http://yoursite.com/tags/Hibernate/index.html">
+  <meta name="description" content="5.1 Realm前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。  1、定义实体及关系   即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体">
+<meta name="keywords" content="Shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《跟我学Shiro》学习笔记 第五章:Realm及相关对象">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/《跟我学shiro》学习笔记-第五章/index.html">
 <meta property="og:site_name" content="赵军的博客">
+<meta property="og:description" content="5.1 Realm前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。  1、定义实体及关系   即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationToken.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationInfo.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png">
+<meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png">
+<meta property="og:updated_time" content="2018-05-07T07:56:59.237Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赵军的博客">
+<meta name="twitter:title" content="《跟我学Shiro》学习笔记 第五章:Realm及相关对象">
+<meta name="twitter:description" content="5.1 Realm前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。  1、定义实体及关系   即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体">
+<meta name="twitter:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB.png">
   
     <link rel="alternative" href="/atom.xml" title="赵军的博客" type="application/atom+xml">
   
@@ -149,60 +161,277 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-《跟我学shiro》学习笔记-第五章" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/20/Hibernate4-JPA注解详解（上）/" class="archive-article-date">
-  	<time datetime="2018-04-20T06:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/20/Hibernate4-JPA注解详解（上）/">Hibernate4 JPA注解详解（上）</a>
+    <h1 class="article-title" itemprop="name">
+      《跟我学Shiro》学习笔记 第五章:Realm及相关对象
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/04/《跟我学shiro》学习笔记-第五章/" class="archive-article-date">
+  	<time datetime="2018-05-04T08:51:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
+</a>
+        
+      </header>
+    
+	<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="5-1-Realm"><a href="#5-1-Realm" class="headerlink" title="5.1 Realm"></a>5.1 Realm</h4><p>前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。 </p>
+<p>1、<strong>定义实体及关系</strong> </p>
+<p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB.png" alt="实体关系"></p>
+<p>即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体中，但是目前为了简单化，直接提取一个权限表，【综合示例】部分会使用完整的表结构。</p>
+<p>用户实体包括：编号(id)、用户名(username)、密码(password)、盐(salt)、是否锁定(locked)；是否锁定用于封禁用户使用，其实最好使用Enum字段存储，可以实现更复杂的用户状态实现。</p>
+<p>角色实体包括：、编号(id)、角色标识符（role）、描述（description）、是否可用（available）；其中角色标识符用于在程序中进行隐式角色判断的，描述用于以后再前台界面显示的、是否可用表示角色当前是否激活。</p>
+<p>权限实体包括：编号（id）、权限标识符（permission）、描述（description）、是否可用（available）；含义和角色实体类似不再阐述</p>
+<p>另外还有两个关系实体：用户-角色实体（用户编号、角色编号，且组合为复合主键）；角色-权限实体（角色编号、权限编号，且组合为复合主键）。</p>
+<p>* sql以及实体类的实例，我已上传至github，文末会给出链接。</p>
+<p>2、<strong>环境准备</strong> </p>
+<p>为了方便数据库操作，使用了“org.springframework: spring-jdbc: 4.0.0.RELEASE”依赖。</p>
+<p>3、<strong>定义Service及Dao</strong> </p>
+<p>为了实现的简单性，只实现必须的功能，其他的可以自己实现即可。 </p>
+<p><strong>PermissionService</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PermissionService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">Permission <span class="title">createPermission</span><span class="params">(Permission permission)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deletePermission</span><span class="params">(Long permissionId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>RoleService</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RoleService</span> </span>&#123;</span><br><span class="line">    <span class="function">Role <span class="title">createRole</span><span class="params">(Role role)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteRole</span><span class="params">(Long roleId)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加角色-权限之间关系</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">correlationPermissions</span><span class="params">(Long roleId, Long... permissionIds)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移除角色-权限之间关系</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">uncorrelationPermissions</span><span class="params">(Long roleId, Long... permissionIds)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>UserService</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建账户</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">User <span class="title">createUser</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">User <span class="title">get</span><span class="params">(Long userId)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改密码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">changePassword</span><span class="params">(Long userId, String newPassword)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加用户-角色关系</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">correlationRoles</span><span class="params">(Long userId, Long... roleIds)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移除用户-角色关系</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unCorrelationRoles</span><span class="params">(Long userId, Long... roleIds)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据用户名查找用户</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">User <span class="title">findByUsername</span><span class="params">(String username)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据用户名查找其角色</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Set&lt;String&gt; <span class="title">findRoles</span><span class="params">(String username)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据用户名查找其权限</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Set&lt;String&gt; <span class="title">findPermissions</span><span class="params">(String username)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>UserServiceImpl</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PasswordHelper passwordHelper = <span class="keyword">new</span> PasswordHelper();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">createUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        passwordHelper.encryptPassword(user);</span><br><span class="line">        <span class="keyword">return</span> userDao.save(user);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在创建账户及修改密码时直接把生成密码操作委托给PasswordHelper。 </p>
+<p><strong>PasswordHelper</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PasswordHelper</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> RandomNumberGenerator randomNumberGenerator = <span class="keyword">new</span> SecureRandomNumberGenerator();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String algorithmName = <span class="string">"MD5"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> hashTterations = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">encryptPassword</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        user.setSalt(randomNumberGenerator.nextBytes().toHex());</span><br><span class="line"></span><br><span class="line">        String newPassword = <span class="keyword">new</span> SimpleHash(</span><br><span class="line">                algorithmName,</span><br><span class="line">                user.getPassword(),</span><br><span class="line">                ByteSource.Util.bytes(user.getCredentialsSalt()),</span><br><span class="line">                hashTterations).toHex();</span><br><span class="line">        user.setPassword(newPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了节省篇幅，对于DAO/Service的接口及实现，具体请参考<a href="https://github.com/zhaojun0193/shiro-example/tree/master/shiro-example-chapter5" target="_blank" rel="noopener">github源码</a>。</p>
+<p>4、定义Realm</p>
+<p><strong>UserRealm</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRealm</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> UserService userService = <span class="keyword">new</span> UserServiceImpl();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection principalCollection)</span> </span>&#123;</span><br><span class="line">        String username = (String)principalCollection.getPrimaryPrincipal();</span><br><span class="line">        SimpleAuthorizationInfo simpleAuthorizationInfo = <span class="keyword">new</span> SimpleAuthorizationInfo();</span><br><span class="line">        simpleAuthorizationInfo.setRoles(userService.findRoles(username));</span><br><span class="line">        simpleAuthorizationInfo.setStringPermissions(userService.findPermissions(username));</span><br><span class="line">        <span class="keyword">return</span> simpleAuthorizationInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken authenticationToken)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">        String username = (String) authenticationToken.getPrincipal();</span><br><span class="line">        User user = userService.findByUsername(username);</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnknownAccountException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Boolean.TRUE.equals(user.getLocked()))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> LockedAccountException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        SimpleAuthenticationInfo authenticationInfo = <span class="keyword">new</span> SimpleAuthenticationInfo(</span><br><span class="line">                user.getUsername(),</span><br><span class="line">                user.getPassword(),</span><br><span class="line">                ByteSource.Util.bytes(user.getCredentialsSalt()),</span><br><span class="line">                getName()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> authenticationInfo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>shiro.ini</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[main]</span></span><br><span class="line"><span class="attr">credentialsMatcher</span>= com.zhaojun.shiro.credentials.RetryLimitHashedCredentialsMatcher</span><br><span class="line">credentialsMatcher.hashAlgorithmName=md5</span><br><span class="line">credentialsMatcher.hashIterations=2</span><br><span class="line">credentialsMatcher.storedCredentialsHexEncoded=true</span><br><span class="line"></span><br><span class="line"><span class="attr">userRealm</span>= com.zhaojun.shiro.realm.UserRealm</span><br><span class="line">userRealm.credentialsMatcher=$credentialsMatcher</span><br><span class="line">securityManager.realms=$userRealm</span><br></pre></td></tr></table></figure>
+<p>1、UserRealm父类AuthorizingRealm将获取Subject相关信息分成两步：获取身份验证信息（doGetAuthenticationInfo）及授权信息（doGetAuthorizationInfo）；</p>
+<p>2、doGetAuthenticationInfo获取身份验证相关信息：首先根据传入的用户名获取User信息；然后如果user为空，那么抛出没找到帐号异常UnknownAccountException；如果user找到但锁定了抛出锁定异常LockedAccountException；最后生成AuthenticationInfo信息，交给间接父类AuthenticatingRealm使用CredentialsMatcher进行判断密码是否匹配，如果不匹配将抛出密码错误异常IncorrectCredentialsException；另外如果密码重试此处太多将抛出超出重试次数异常ExcessiveAttemptsException；在组装SimpleAuthenticationInfo信息时，需要传入：身份信息（用户名）、凭据（密文密码）、盐（username+salt），CredentialsMatcher使用盐加密传入的明文密码和此处的密文密码进行匹配。</p>
+<p>3、doGetAuthorizationInfo获取授权信息：PrincipalCollection是一个身份集合，因为我们现在就一个Realm，所以直接调用getPrimaryPrincipal得到之前传入的用户名即可；然后根据用户名调用UserService接口获取角色及权限信息。</p>
+<h4 id="5-2AuthenticationToken"><a href="#5-2AuthenticationToken" class="headerlink" title="5.2AuthenticationToken"></a>5.2AuthenticationToken</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationToken.png" alt="AuthenticationToken"></p>
+<p>AuthenticationToken用于收集用户提交的身份（如用户名）及凭据（如密码）： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AuthenticationToken</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;  </span><br><span class="line">    <span class="function">Object <span class="title">getPrincipal</span><span class="params">()</span></span>; <span class="comment">//身份  </span></span><br><span class="line">    <span class="function">Object <span class="title">getCredentials</span><span class="params">()</span></span>; <span class="comment">//凭据  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>扩展接口RememberMeAuthenticationToken：提供了“boolean isRememberMe()”现“记住我”的功能；</p>
+<p>扩展接口是HostAuthenticationToken：提供了“String getHost()”方法用于获取用户“主机”的功能。</p>
+<p>Shiro提供了一个直接拿来用的UsernamePasswordToken，用于实现用户名/密码Token组，另外其实现了RememberMeAuthenticationToken和HostAuthenticationToken，可以实现记住我及主机验证的支持。</p>
+<h4 id="6-3AuthenticationInfo"><a href="#6-3AuthenticationInfo" class="headerlink" title="6.3AuthenticationInfo"></a>6.3AuthenticationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationInfo.png" alt="AuthenticationInfo"></p>
+<p>AuthenticationInfo有两个作用：</p>
+<p>1、如果Realm是AuthenticatingRealm子类，则提供给AuthenticatingRealm内部使用的CredentialsMatcher进行凭据验证；（如果没有继承它需要在自己的Realm中自己实现验证）；</p>
+<p>2、提供给SecurityManager来创建Subject（提供身份信息）；</p>
+<p>MergableAuthenticationInfo用于提供在多Realm时合并AuthenticationInfo的功能，主要合并Principal、如果是其他的如credentialsSalt，会用后边的信息覆盖前边的。</p>
+<p>比如HashedCredentialsMatcher，在验证时会判断AuthenticationInfo是否是SaltedAuthenticationInfo子类，来获取盐信息。</p>
+<p>Account相当于我们之前的User，SimpleAccount是其一个实现；在IniRealm、PropertiesRealm这种静态创建帐号信息的场景中使用，这些Realm直接继承了SimpleAccountRealm，而SimpleAccountRealm提供了相关的API来动态维护SimpleAccount；即可以通过这些API来动态增删改查SimpleAccount；动态增删改查角色/权限信息。及如果您的帐号不是特别多，可以使用这种方式，具体请参考SimpleAccountRealm Javadoc。</p>
+<p>其他情况一般返回SimpleAuthenticationInfo即可。</p>
+<h4 id="6-4PrincipalCollection"><a href="#6-4PrincipalCollection" class="headerlink" title="6.4PrincipalCollection"></a>6.4PrincipalCollection</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png" alt="PrincipalCollection"></p>
+<p>因为我们可以在Shiro中同时配置多个Realm，所以呢身份信息可能就有多个；因此其提供了PrincipalCollection用于聚合这些身份信息： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PrincipalCollection</span> <span class="keyword">extends</span> <span class="title">Iterable</span>, <span class="title">Serializable</span> </span>&#123;  </span><br><span class="line">    <span class="function">Object <span class="title">getPrimaryPrincipal</span><span class="params">()</span></span>; <span class="comment">//得到主要的身份  </span></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">oneByType</span><span class="params">(Class&lt;T&gt; type)</span></span>; <span class="comment">//根据身份类型获取第一个  </span></span><br><span class="line">    &lt;T&gt; <span class="function">Collection&lt;T&gt; <span class="title">byType</span><span class="params">(Class&lt;T&gt; type)</span></span>; <span class="comment">//根据身份类型获取一组  </span></span><br><span class="line">    <span class="function">List <span class="title">asList</span><span class="params">()</span></span>; <span class="comment">//转换为List  </span></span><br><span class="line">    <span class="function">Set <span class="title">asSet</span><span class="params">()</span></span>; <span class="comment">//转换为Set  </span></span><br><span class="line">    <span class="function">Collection <span class="title">fromRealm</span><span class="params">(String realmName)</span></span>; <span class="comment">//根据Realm名字获取  </span></span><br><span class="line">    <span class="function">Set&lt;String&gt; <span class="title">getRealmNames</span><span class="params">()</span></span>; <span class="comment">//获取所有身份验证通过的Realm名字  </span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>; <span class="comment">//判断是否为空  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为PrincipalCollection聚合了多个，此处最需要注意的是getPrimaryPrincipal，如果只有一个Principal那么直接返回即可，如果有多个Principal，则返回第一个（因为内部使用Map存储，所以可以认为是返回任意一个）；oneByType / byType根据凭据的类型返回相应的Principal；fromRealm根据Realm名字（每个Principal都与一个Realm关联）获取相应的Principal。 </p>
+<p>MutablePrincipalCollection是一个可变的PrincipalCollection接口，即提供了如下可变方法： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MutablePrincipalCollection</span> <span class="keyword">extends</span> <span class="title">PrincipalCollection</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(Object principal, String realmName)</span></span>; <span class="comment">//添加Realm-Principal的关联  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addAll</span><span class="params">(Collection principals, String realmName)</span></span>; <span class="comment">//添加一组Realm-Principal的关联  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addAll</span><span class="params">(PrincipalCollection principals)</span></span>;<span class="comment">//添加PrincipalCollection  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;<span class="comment">//清空  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-4AuthorizationInfo"><a href="#6-4AuthorizationInfo" class="headerlink" title="6.4AuthorizationInfo"></a>6.4AuthorizationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png" alt="AuthorizationInfo"></p>
+<p>AuthorizationInfo用于聚合授权信息的： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AuthorizationInfo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;  </span><br><span class="line">    <span class="function">Collection&lt;String&gt; <span class="title">getRoles</span><span class="params">()</span></span>; <span class="comment">//获取角色字符串信息  </span></span><br><span class="line">    <span class="function">Collection&lt;String&gt; <span class="title">getStringPermissions</span><span class="params">()</span></span>; <span class="comment">//获取权限字符串信息  </span></span><br><span class="line">    <span class="function">Collection&lt;Permission&gt; <span class="title">getObjectPermissions</span><span class="params">()</span></span>; <span class="comment">//获取Permission对象信息  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们使用AuthorizingRealm时，如果身份验证成功，在进行授权时就通过doGetAuthorizationInfo方法获取角色/权限信息用于授权验证。</p>
+<p>Shiro提供了一个实现SimpleAuthorizationInfo，大多数时候使用这个即可。</p>
+<p>对于Account及SimpleAccount，之前的【6.3 AuthenticationInfo】已经介绍过了，用于SimpleAccountRealm子类，实现动态角色/权限维护的。</p>
+<h4 id="6-5-Subject"><a href="#6-5-Subject" class="headerlink" title="6.5 Subject"></a>6.5 Subject</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png" alt="Subject"></p>
+<p>Subject是Shiro的核心对象，基本所有身份验证、授权都是通过Subject完成。 </p>
+<p>1.身份信息获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">getPrincipal</span><span class="params">()</span></span>; <span class="comment">//Primary Principal  </span></span><br><span class="line"><span class="function">PrincipalCollection <span class="title">getPrincipals</span><span class="params">()</span></span>; <span class="comment">// PrincipalCollection</span></span><br></pre></td></tr></table></figure>
+<p>2.身份验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isAuthenticated</span><span class="params">()</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isRemembered</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>通过login登录，如果登录失败将抛出相应的AuthenticationException，如果登录成功调用isAuthenticated就会返回true，即已经通过身份验证；如果isRemembered返回true，表示是通过记住我功能登录的而不是调用login方法登录的。isAuthenticated/isRemembered是互斥的，即如果其中一个返回true，另一个返回false。 </p>
+<p>3.角色授权验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasRole</span><span class="params">(String roleIdentifier)</span></span>;  </span><br><span class="line"><span class="keyword">boolean</span>[] hasRoles(List&lt;String&gt; roleIdentifiers);  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasAllRoles</span><span class="params">(Collection&lt;String&gt; roleIdentifiers)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkRole</span><span class="params">(String roleIdentifier)</span> <span class="keyword">throws</span> AuthorizationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkRoles</span><span class="params">(Collection&lt;String&gt; roleIdentifiers)</span> <span class="keyword">throws</span> AuthorizationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkRoles</span><span class="params">(String... roleIdentifiers)</span> <span class="keyword">throws</span> AuthorizationException</span>;</span><br></pre></td></tr></table></figure>
+<p>4.授权验证权限</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPermitted</span><span class="params">(String permission)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPermitted</span><span class="params">(Permission permission)</span></span>;  </span><br><span class="line"><span class="keyword">boolean</span>[] isPermitted(String... permissions);  </span><br><span class="line"><span class="keyword">boolean</span>[] isPermitted(List&lt;Permission&gt; permissions);  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPermittedAll</span><span class="params">(String... permissions)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPermittedAll</span><span class="params">(Collection&lt;Permission&gt; permissions)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkPermission</span><span class="params">(String permission)</span> <span class="keyword">throws</span> AuthorizationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkPermission</span><span class="params">(Permission permission)</span> <span class="keyword">throws</span> AuthorizationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkPermissions</span><span class="params">(String... permissions)</span> <span class="keyword">throws</span> AuthorizationException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkPermissions</span><span class="params">(Collection&lt;Permission&gt; permissions)</span> <span class="keyword">throws</span> AuthorizationException</span>;</span><br></pre></td></tr></table></figure>
+<p>5.回话</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Session <span class="title">getSession</span><span class="params">()</span></span>; <span class="comment">//相当于getSession(true)  </span></span><br><span class="line"><span class="function">Session <span class="title">getSession</span><span class="params">(<span class="keyword">boolean</span> create)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>类似于Web中的会话。如果登录成功就相当于建立了会话，接着可以使用getSession获取；如果create=false如果没有会话将返回null，而create=true如果没有会话会强制创建一个。 </p>
+<p>6.退出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logout</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>7.RunAs</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">runAs</span><span class="params">(PrincipalCollection principals)</span> <span class="keyword">throws</span> NullPointerException, IllegalStateException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isRunAs</span><span class="params">()</span></span>;  </span><br><span class="line"><span class="function">PrincipalCollection <span class="title">getPreviousPrincipals</span><span class="params">()</span></span>;  </span><br><span class="line"><span class="function">PrincipalCollection <span class="title">releaseRunAs</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>RunAs即实现“允许A假设为B身份进行访问”；通过调用subject.runAs(b)进行访问；接着调用subject.getPrincipals将获取到B的身份；此时调用isRunAs将返回true；而a的身份需要通过subject. getPreviousPrincipals获取；如果不需要RunAs了调用subject. releaseRunAs即可。 </p>
+<p>8.多线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;V&gt; <span class="function">V <span class="title">execute</span><span class="params">(Callable&lt;V&gt; callable)</span> <span class="keyword">throws</span> ExecutionException</span>;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable runnable)</span></span>;  </span><br><span class="line">&lt;V&gt; <span class="function">Callable&lt;V&gt; <span class="title">associateWith</span><span class="params">(Callable&lt;V&gt; callable)</span></span>;  </span><br><span class="line"><span class="function">Runnable <span class="title">associateWith</span><span class="params">(Runnable runnable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>实现线程之间的Subject传播，因为Subject是线程绑定的；因此在多线程执行中需要传播到相应的线程才能获取到相应的Subject。最简单的办法就是通过execute(runnable/callable实例)直接调用；或者通过associateWith(runnable/callable实例)得到一个包装后的实例；它们都是通过：1、把当前线程的Subject绑定过去；2、在线程执行结束后自动释放。</p>
+<p>Subject自己不会实现相应的身份验证/授权逻辑，而是通过DelegatingSubject委托给SecurityManager实现；及可以理解为Subject是一个面门。</p>
+<p>对于Subject的构建一般没必要我们去创建；一般通过SecurityUtils.getSubject()获取：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Subject <span class="title">getSubject</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    Subject subject = ThreadContext.getSubject();  </span><br><span class="line">    <span class="keyword">if</span> (subject == <span class="keyword">null</span>) &#123;  </span><br><span class="line">        subject = (<span class="keyword">new</span> Subject.Builder()).buildSubject();  </span><br><span class="line">        ThreadContext.bind(subject);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> subject;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即首先查看当前线程是否绑定了Subject，如果没有通过Subject.Builder构建一个然后绑定到现场返回。</p>
+<p>如果想自定义创建，可以通过：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Subject.Builder().principals(身份).authenticated(<span class="keyword">true</span>/<span class="keyword">false</span>).buildSubject()</span><br></pre></td></tr></table></figure>
+<p>这种可以创建相应的Subject实例了，然后自己绑定到线程即可。在new Builder()时如果没有传入SecurityManager，自动调用SecurityUtils.getSecurityManager获取；也可以自己传入一个实例。 </p>
+<p>对于Subject我们一般这么使用：</p>
+<p><strong>1、身份验证（login）</strong></p>
+<p><strong>2、授权（hasRole*/isPermitted<em>或checkRole</em>/checkPermission*）</strong></p>
+<p><strong>3、将相应的数据存储到会话（Session）</strong></p>
+<p><strong>4、切换身份（RunAs）/多线程身份传播</strong></p>
+<p><strong>5、退出</strong></p>
+<hr>
+<p>张开涛的博客：<a href="http://jinnianshilongnian.iteye.com/category/305053" target="_blank" rel="noopener">http://jinnianshilongnian.iteye.com/category/305053</a></p>
+<p>我的博客：<a href="https://zhaojun0193.github.io" target="_blank" rel="noopener">https://zhaojun0193.github.io</a></p>
+<p>本文代码地址：<a href="https://github.com/zhaojun0193/shiro-example" target="_blank" rel="noopener">https://github.com/zhaojun0193/shiro-example</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hibernate</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shiro</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/04/《跟我学shiro》学习笔记-第五章/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/25/《跟我学shiro》学习笔记-第四章/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《跟我学Shiro》学习笔记 第四章:编码/加密</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -225,9 +454,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
