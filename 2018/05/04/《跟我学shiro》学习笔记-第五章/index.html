@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png">
 <meta property="og:image" content="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png">
-<meta property="og:updated_time" content="2018-05-07T07:59:15.288Z">
+<meta property="og:updated_time" content="2018-05-07T08:04:06.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《跟我学Shiro》学习笔记 第五章:Realm及相关对象">
 <meta name="twitter:description" content="5.1 Realm前面的章节中我们已经详细的介绍了Realm，接下来再来看一下一般真实环境下的Realm如何实现。  1、定义实体及关系   即用户-角色之间是多对多关系，角色-权限之间是多对多关系；且用户和权限之间通过角色建立关系；在系统中验证时通过权限验证，角色只是权限集合，即所谓的显示角色；其实权限应该对应到资源（如菜单、URL、页面按钮、Java方法等）中，即应该将权限字符串存储到资源实体">
@@ -224,7 +224,7 @@
 <p>扩展接口RememberMeAuthenticationToken：提供了“boolean isRememberMe()”现“记住我”的功能；</p>
 <p>扩展接口是HostAuthenticationToken：提供了“String getHost()”方法用于获取用户“主机”的功能。</p>
 <p>Shiro提供了一个直接拿来用的UsernamePasswordToken，用于实现用户名/密码Token组，另外其实现了RememberMeAuthenticationToken和HostAuthenticationToken，可以实现记住我及主机验证的支持。</p>
-<h4 id="6-3AuthenticationInfo"><a href="#6-3AuthenticationInfo" class="headerlink" title="6.3AuthenticationInfo"></a>6.3AuthenticationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationInfo.png" alt="AuthenticationInfo"></p>
+<h4 id="5-3AuthenticationInfo"><a href="#5-3AuthenticationInfo" class="headerlink" title="5.3AuthenticationInfo"></a>5.3AuthenticationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthenticationInfo.png" alt="AuthenticationInfo"></p>
 <p>AuthenticationInfo有两个作用：</p>
 <p>1、如果Realm是AuthenticatingRealm子类，则提供给AuthenticatingRealm内部使用的CredentialsMatcher进行凭据验证；（如果没有继承它需要在自己的Realm中自己实现验证）；</p>
 <p>2、提供给SecurityManager来创建Subject（提供身份信息）；</p>
@@ -232,19 +232,19 @@
 <p>比如HashedCredentialsMatcher，在验证时会判断AuthenticationInfo是否是SaltedAuthenticationInfo子类，来获取盐信息。</p>
 <p>Account相当于我们之前的User，SimpleAccount是其一个实现；在IniRealm、PropertiesRealm这种静态创建帐号信息的场景中使用，这些Realm直接继承了SimpleAccountRealm，而SimpleAccountRealm提供了相关的API来动态维护SimpleAccount；即可以通过这些API来动态增删改查SimpleAccount；动态增删改查角色/权限信息。及如果您的帐号不是特别多，可以使用这种方式，具体请参考SimpleAccountRealm Javadoc。</p>
 <p>其他情况一般返回SimpleAuthenticationInfo即可。</p>
-<h4 id="6-4PrincipalCollection"><a href="#6-4PrincipalCollection" class="headerlink" title="6.4PrincipalCollection"></a>6.4PrincipalCollection</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png" alt="PrincipalCollection"></p>
+<h4 id="5-4PrincipalCollection"><a href="#5-4PrincipalCollection" class="headerlink" title="5.4PrincipalCollection"></a>5.4PrincipalCollection</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/PrincipalCollection.png" alt="PrincipalCollection"></p>
 <p>因为我们可以在Shiro中同时配置多个Realm，所以呢身份信息可能就有多个；因此其提供了PrincipalCollection用于聚合这些身份信息： </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PrincipalCollection</span> <span class="keyword">extends</span> <span class="title">Iterable</span>, <span class="title">Serializable</span> </span>&#123;  </span><br><span class="line">    <span class="function">Object <span class="title">getPrimaryPrincipal</span><span class="params">()</span></span>; <span class="comment">//得到主要的身份  </span></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">oneByType</span><span class="params">(Class&lt;T&gt; type)</span></span>; <span class="comment">//根据身份类型获取第一个  </span></span><br><span class="line">    &lt;T&gt; <span class="function">Collection&lt;T&gt; <span class="title">byType</span><span class="params">(Class&lt;T&gt; type)</span></span>; <span class="comment">//根据身份类型获取一组  </span></span><br><span class="line">    <span class="function">List <span class="title">asList</span><span class="params">()</span></span>; <span class="comment">//转换为List  </span></span><br><span class="line">    <span class="function">Set <span class="title">asSet</span><span class="params">()</span></span>; <span class="comment">//转换为Set  </span></span><br><span class="line">    <span class="function">Collection <span class="title">fromRealm</span><span class="params">(String realmName)</span></span>; <span class="comment">//根据Realm名字获取  </span></span><br><span class="line">    <span class="function">Set&lt;String&gt; <span class="title">getRealmNames</span><span class="params">()</span></span>; <span class="comment">//获取所有身份验证通过的Realm名字  </span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>; <span class="comment">//判断是否为空  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因为PrincipalCollection聚合了多个，此处最需要注意的是getPrimaryPrincipal，如果只有一个Principal那么直接返回即可，如果有多个Principal，则返回第一个（因为内部使用Map存储，所以可以认为是返回任意一个）；oneByType / byType根据凭据的类型返回相应的Principal；fromRealm根据Realm名字（每个Principal都与一个Realm关联）获取相应的Principal。 </p>
 <p>MutablePrincipalCollection是一个可变的PrincipalCollection接口，即提供了如下可变方法： </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MutablePrincipalCollection</span> <span class="keyword">extends</span> <span class="title">PrincipalCollection</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(Object principal, String realmName)</span></span>; <span class="comment">//添加Realm-Principal的关联  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addAll</span><span class="params">(Collection principals, String realmName)</span></span>; <span class="comment">//添加一组Realm-Principal的关联  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addAll</span><span class="params">(PrincipalCollection principals)</span></span>;<span class="comment">//添加PrincipalCollection  </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;<span class="comment">//清空  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="6-4AuthorizationInfo"><a href="#6-4AuthorizationInfo" class="headerlink" title="6.4AuthorizationInfo"></a>6.4AuthorizationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png" alt="AuthorizationInfo"></p>
+<h4 id="5-5AuthorizationInfo"><a href="#5-5AuthorizationInfo" class="headerlink" title="5.5AuthorizationInfo"></a>5.5AuthorizationInfo</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/AuthorizationInfo.png" alt="AuthorizationInfo"></p>
 <p>AuthorizationInfo用于聚合授权信息的： </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AuthorizationInfo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;  </span><br><span class="line">    <span class="function">Collection&lt;String&gt; <span class="title">getRoles</span><span class="params">()</span></span>; <span class="comment">//获取角色字符串信息  </span></span><br><span class="line">    <span class="function">Collection&lt;String&gt; <span class="title">getStringPermissions</span><span class="params">()</span></span>; <span class="comment">//获取权限字符串信息  </span></span><br><span class="line">    <span class="function">Collection&lt;Permission&gt; <span class="title">getObjectPermissions</span><span class="params">()</span></span>; <span class="comment">//获取Permission对象信息  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当我们使用AuthorizingRealm时，如果身份验证成功，在进行授权时就通过doGetAuthorizationInfo方法获取角色/权限信息用于授权验证。</p>
 <p>Shiro提供了一个实现SimpleAuthorizationInfo，大多数时候使用这个即可。</p>
 <p>对于Account及SimpleAccount，之前的【6.3 AuthenticationInfo】已经介绍过了，用于SimpleAccountRealm子类，实现动态角色/权限维护的。</p>
-<h4 id="6-5-Subject"><a href="#6-5-Subject" class="headerlink" title="6.5 Subject"></a>6.5 Subject</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png" alt="Subject"></p>
+<h4 id="5-6-Subject"><a href="#5-6-Subject" class="headerlink" title="5.6 Subject"></a>5.6 Subject</h4><p><img src="http://oucja4p5v.bkt.clouddn.com//image/shiro/Subject.png" alt="Subject"></p>
 <p>Subject是Shiro的核心对象，基本所有身份验证、授权都是通过Subject完成。 </p>
 <p>1.身份信息获取</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">getPrincipal</span><span class="params">()</span></span>; <span class="comment">//Primary Principal  </span></span><br><span class="line"><span class="function">PrincipalCollection <span class="title">getPrincipals</span><span class="params">()</span></span>; <span class="comment">// PrincipalCollection</span></span><br></pre></td></tr></table></figure>
@@ -397,6 +397,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/05/15/《跟我学shiro》学习笔记-第六章/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          《跟我学Shiro》学习笔记 第六章:与Web集成
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/04/25/《跟我学shiro》学习笔记-第四章/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">《跟我学Shiro》学习笔记 第四章:编码/加密</div>
@@ -529,19 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,7 +546,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shiro</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ilog</a>
               </li>
             
             <div class="clearfix"></div>
